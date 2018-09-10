@@ -11,4 +11,8 @@ class Radiografia extends Model
     public function estudio(){
         return $this->belongsTo(Estudio::class);
     }
+
+    public function consulta(){
+        return $this->belongsTo(Consulta::class);
+    }
 }
