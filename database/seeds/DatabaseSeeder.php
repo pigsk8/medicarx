@@ -11,11 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        $user_state = new \App\EstadoUsuario();
-        $user_state->descripcion = 'sin rol';
-        $user_state->save();    
-        
+        // $this->call(UsersTableSeeder::class);   
         $user_state2 = new \App\EstadoUsuario();
         $user_state2->descripcion = 'activo';
         $user_state2->save();    
@@ -54,13 +50,37 @@ class DatabaseSeeder extends Seeder
         
         $adminUser = \App\User::create([
             'name' => 'admin',
+            'username' => 'admin',
+            'ci' => '111111',
             'email' => 'admin@mail.com',
-            'password' => 'admin',
-            'estado_usuario_id' => 2
+            'password' => bcrypt('admin'),
+            'avatar' => '',
+            'estado_usuario_id' => 1
             ]);
         //$adminUser->save();
-
         $adminUser->attachRole($admin);
+
+        $pacienteUser = \App\User::create([
+            'name' => 'paciente',
+            'username' => 'paciente',
+            'ci' => '222222',
+            'email' => 'paciente@mail.com',
+            'password' => bcrypt('paciente'),
+            'avatar' => '',
+            'estado_usuario_id' => 1
+            ]);
+        $pacienteUser->attachRole($paciente);
+
+        $medicoUser = \App\User::create([
+            'name' => 'medico',
+            'username' => 'medico',
+            'ci' => '3333333',
+            'email' => 'medicon@mail.com',
+            'password' => bcrypt('medico'),
+            'avatar' => '',
+            'estado_usuario_id' => 1
+            ]);
+        $medicoUser->attachRole($medico);
         
     }
 }

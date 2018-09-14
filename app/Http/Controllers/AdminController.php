@@ -14,9 +14,11 @@ class AdminController extends Controller
         $new_user = new User();
         $new_user->name =  $request->input('name');
         $new_user->email =  $request->input('email');
+        $new_user->username =  $request->input('username');
+        $new_user->ci =  $request->input('ci');
         $new_user->password =  bcrypt($request->input('password'));
         $new_user->remember_token = $request->input('_token');
-        $new_user->estado_usuario_id =  2;
+        $new_user->estado_usuario_id =  1;
         $new_user->save();
 
         $role_entry = Role::find($request->input('role'));
