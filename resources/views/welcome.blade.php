@@ -4,8 +4,12 @@
 
 <div class="container">
     <div class="row">
-        <div class="col">
-            
+        <div class="col-md-6">
+            @if (Auth::check())
+                <?php $user = Auth::user(); ?>
+
+                <h2>Bienvenido <?= $user->name ?></h2>
+            @endif
             <div>
                 <h1>Medicarx</h1>
                 <h3>Sistema de radiografías</h3>
@@ -13,7 +17,7 @@
             </div>
 
         </div>
-        <div class="col">
+        <div class="col-md-6">
             @if (Auth::guest())
                 @include('auth.forms.loginform')
             @else

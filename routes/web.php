@@ -29,5 +29,11 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+//Admin
 //Registrar como administrador
 Route::post('/registro','AdminController@registro');
+
+//perfil usuarios
+Route::get('/perfil','perfilController@list')->middleware('auth')->name('perfil');
+Route::get('/perfil/{user}','perfilController@show')->middleware('auth');
+Route::post('/perfil','perfilController@edit')->middleware('auth')->name('edit-perfil');

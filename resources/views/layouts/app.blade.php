@@ -46,12 +46,22 @@
                             <li><a href="{{ route('login') }}">Inicia Sesión</a></li>
                             <li><a href="{{ route('register') }}">Registrate</a></li>
                         @else
+                            @role('admin')
+                            <li>
+                            <a href="{{ route('perfil') }}">Usuarios</a>
+                            </li>
+                            @endrole
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                    <a href="/perfil/<?=Auth::User()->id?>">
+                                        Editar perfil
+                                    </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);   
+        //estados
         $user_state2 = new \App\EstadoUsuario();
         $user_state2->descripcion = 'activo';
         $user_state2->save();    
@@ -27,6 +28,17 @@ class DatabaseSeeder extends Seeder
         $c_state2 = new \App\EstadoConsulta();
         $c_state2->descripcion = 'revisada';
         $c_state2->save(); 
+
+        //preguntas
+        $preg1 = new \App\Pregunta();
+        $preg1->descripcion = '¿país favorito?';
+        $preg1->save();
+        $preg2 = new \App\Pregunta();
+        $preg2->descripcion = '¿animal favorito?';
+        $preg2->save();
+        $preg3 = new \App\Pregunta();
+        $preg3->descripcion = '¿carro favorito?';
+        $preg3->save();
 
         //ENTRUST ADMIN
 
@@ -75,7 +87,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'medico',
             'username' => 'medico',
             'ci' => '3333333',
-            'email' => 'medicon@mail.com',
+            'email' => 'medico@mail.com',
             'password' => bcrypt('medico'),
             'avatar' => '',
             'estado_usuario_id' => 1

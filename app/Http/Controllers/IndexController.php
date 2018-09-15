@@ -10,10 +10,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $user = User::find(1);
         $roles = Role::all();
         return view('welcome',[
-            'user'=>$user,
             'roles'=>$roles
             ]);
     }
