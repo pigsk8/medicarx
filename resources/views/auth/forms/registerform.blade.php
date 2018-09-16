@@ -43,7 +43,7 @@
                 <label for="username" class="col-md-4 control-label">Nombre de usuario</label>
 
                 <div class="col-md-6">
-                    <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required>
+                    <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required maxlength="20">
 
                     @if ($errors->has('username'))
                         <span class="help-block">
@@ -96,11 +96,10 @@
 
                 <div class="col-md-6">
                     <select class="form-control" name="role" id="role">
-                        @forelse($roles as $rol)
-                        <option value="{{$rol->id}}">{{$rol->display_name}}</option>
-                        @empty
                         <option value="0"></option>
-                        @endforelse
+                        @foreach($roles as $rol)
+                        <option value="{{$rol->id}}">{{$rol->display_name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

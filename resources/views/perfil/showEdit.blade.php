@@ -90,23 +90,14 @@
             @if ($roles)
           <div class="form-group">
                 <label for="role" class="col-md-4 control-label">Rol</label>
-                <?php $rolesAsignado = $user->roles()->get() ?>
 
+                
                 <div class="col-md-6">
-                    <p>Tu rol actual: 
-                    @forelse( $rolesAsignado as $rolAsignado )
-                      <span>{{ $rolAsignado->display_name }}</span>  
-                    @empty
-                      <span>No tiene rol</span>
-                    @endforelse
-                    </p>
                     <select class="form-control" name="role" id="role">
-                        @forelse($roles as $rol)
-
-                    <option value="{{$rol->id}}">{{ $rol->display_name }}</option>
-                        @empty
                         <option value="0"></option>
-                        @endforelse
+                        @foreach($roles as $rol)
+                        <option value="{{$rol->id}}" {{ $user->hasRole($rol->name) ? 'selected' : '' }}> {{ $rol->display_name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
