@@ -18,6 +18,7 @@ class CreateUsuarioPreguntas extends Migration
             $table->integer('pregunta_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('pregunta_id')->references('id')->on('preguntas');
+            $table->primary(['user_id', 'pregunta_id']);
             $table->string('respuesta');
             $table->timestamps();
         });

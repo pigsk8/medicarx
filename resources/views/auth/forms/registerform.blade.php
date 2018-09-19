@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('ci') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                 <label for="username" class="col-md-4 control-label">Nombre de usuario</label>
 
                 <div class="col-md-6">

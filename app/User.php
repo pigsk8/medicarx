@@ -36,4 +36,9 @@ class User extends Authenticatable
     public function consultas(){
         return $this->hasMany(Consulta::class);
     }
+
+    public function preguntas(){
+        return $this->belongsToMany(Pregunta::class, 'pregunta_usuario', 'user_id', 'pregunta_id')->withPivot('respuesta');
+    }
+
 }

@@ -19,7 +19,17 @@
 
 @if ( Auth::user()->id == $user->id || $isAdmin )
 
-<h3>Editar perfil, usuario <span class="text-capitalize">{{ $user->name }}</span></h3>
+<h3>Editar perfil, usuario</h3>
+<h4><span class="text-capitalize">{{ $user->name }}</span></h4>
+<h4>
+    @forelse($roles as $rol)
+        @if ($user->hasRole($rol->name))
+        Rol: {{ $rol->display_name }}
+        @endif
+    @empty
+    no tienes ningún rol asociado
+    @endforelse
+</h4>
 
 <div class="row">
 <div class="col-md-8 col-md-offset-2">
@@ -29,6 +39,7 @@
     <div class="panel-body">
         <form class="form-horizontal" method="POST" action="/perfil">
         {{ csrf_field() }}
+        <input type="hidden" name="user_id" value="{{$user->id}}">
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-4 control-label">Nombre completo</label>
@@ -88,7 +99,7 @@
 
             @role('admin') 
             @if ($roles)
-          <div class="form-group">
+            <div class="form-group">
                 <label for="role" class="col-md-4 control-label">Rol</label>
 
                 
@@ -105,24 +116,29 @@
             @endrole
 
             <div class="form-group">
-              <label for="preguntas" class="col-md-4 control-label">Preguntas</label> 
+                <label for="preguntas" class="col-md-4 control-label">Preguntas</label> 
             </div> 
 
-            @forelse($questions as $pregunta)
+            <?php $cont=0 ?>
+            @forelse($questions as $pregunta)       
             <div class="form-group{{ $errors->has('pregunta'.$pregunta->id) ? ' has-error' : '' }}">
-              <label for="pregunta{{$pregunta->id}}" class="col-md-4 control-label">{{ $pregunta->descripcion }}</label>
-              
-              <div class="col-md-6">
-                  <input id="pregunta{{$pregunta->id}}" type="text" class="form-control" name="pregunta{{$pregunta->id}}" value="" required>
-
-                  @if ($errors->has('email'))
-                      <span class="help-block">
-                          <strong>{{ $errors->first('email') }}</strong>
-                      </span>
-                  @endif
-              </div>
+                <label for="pregunta{{$pregunta->id}}" class="col-md-4 control-label">{{ $pregunta->descripcion }}</label>
+            
+            <div class="col-md-6">
+                @if($user->preguntas()->count())
+                <input id="pregunta{{$pregunta->id}}" type="text" class="form-control" name="pregunta{{$pregunta->id}}" value="{{ $user->preguntas[$cont]->pivot->respuesta }}" required>
+                @else
+                <input id="pregunta{{$pregunta->id}}" type="text" class="form-control" name="pregunta{{$pregunta->id}}" value="" required>
+                @endif
+                @if ($errors->has('pregunta{{$pregunta->id}}'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('pregunta'.$pregunta->id) }}</strong>
+                    </span>
+                @endif
+            </div>
             
             </div>
+            <?php $cont++; ?>
             @empty
             <div class="form-group">
             No hay preguntas de seguridad

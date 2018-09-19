@@ -27,6 +27,21 @@ class perfilController extends Controller
     }
 
     public function edit(Request $request){
-        dd($request);
+        $userEdit = User::find($request->user_id);
+        $userEdit->name = $request->name;
+        $userEdit->email = $request->email;
+        $userEdit->ci = $request->ci;
+        $userEdit->username = $request->username;
+        $userEdit->save();
+
+        $role_entry = Role::find($request->input('role'));
+        
+        $userEdit->roles()->detach();
+        $userEdit->attachRole($role_entry);
+
+        $userEdit->preguntas()->detach();
+        $userEdit->preguntas()->attach(1, ['respuesta' => $request->pregunta1]);
+        $userEdit->preguntas()->attach(2, ['respuesta' => $request->pregunta2]);
+        $userEdit->preguntas()->attach(3, ['respuesta' => $request->pregunta3]);
     }
 }

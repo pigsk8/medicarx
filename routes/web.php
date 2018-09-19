@@ -29,6 +29,8 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+Route::post('password/question', 'Auth\ForgotPasswordController@validateQuestionsForm')->name('password.question');
+Route::post('password/question/reset', 'Auth\ForgotPasswordController@resetPassword')->name('passwordq.request');
 //Admin
 //Registrar como administrador
 Route::post('/registro','AdminController@registro');
