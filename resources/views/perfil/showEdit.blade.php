@@ -37,7 +37,7 @@
     <div class="panel-heading">Actualizar perfil</div>
 
     <div class="panel-body">
-        <form class="form-horizontal" method="POST" action="/perfil">
+        <form class="form-horizontal" method="POST" action="/perfil" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input type="hidden" name="user_id" value="{{$user->id}}">
 
@@ -92,6 +92,20 @@
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group {{ $errors->has('avatar') ? ' has-error' : '' }}">
+                <label for="avatar" class="col-md-4 control-label ">Avatar</label>
+
+                <div class="col-md-6">
+                    <input id="avatar" type="file" class="form-control-file{{ $errors->has('avatar') ? ' is-invalid' : '' }}" name="avatar">
+
+                    @if ($errors->has('avatar'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('avatar') }}</strong>
                         </span>
                     @endif
                 </div>

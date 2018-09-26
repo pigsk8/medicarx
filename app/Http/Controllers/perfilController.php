@@ -32,6 +32,9 @@ class perfilController extends Controller
         $userEdit->email = $request->email;
         $userEdit->ci = $request->ci;
         $userEdit->username = $request->username;
+        $avatar = $request->avatar;
+        $userEdit->avatar = $avatar->store('users', 'public');
+
         $userEdit->save();
 
         $role_entry = Role::find($request->input('role'));
@@ -43,5 +46,7 @@ class perfilController extends Controller
         $userEdit->preguntas()->attach(1, ['respuesta' => $request->pregunta1]);
         $userEdit->preguntas()->attach(2, ['respuesta' => $request->pregunta2]);
         $userEdit->preguntas()->attach(3, ['respuesta' => $request->pregunta3]);
+
+        return redirect('/perfil');
     }
 }
