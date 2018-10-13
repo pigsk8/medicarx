@@ -34,46 +34,39 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Inicia Sesión</a></li>
-                            <li><a href="{{ route('register') }}">Registrate</a></li>
+                            {{-- <li><a href="{{ route('login') }}">Inicia Sesión</a></li>
+                            <li><a href="{{ route('register') }}">Registrate</a></li> --}}
                         @else
+
+                            <li>
+                                <a>Bienvenido {{ Auth::user()->name }}<span style="font-weigth: strong;"> | </span></a> 
+                            </li>
                             @role('admin')
                             <li>
-                            <a href="{{ route('perfil') }}">Usuarios</a>
+                                <a href="{{ route('perfil') }}">Usuarios</a>
                             </li>
                             @endrole
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                            @role(['admin','medico'])
+                            <li>
+                                <a href="/perfil/<?=Auth::User()->id?>">Editar perfil</a>
+                            </li>
+                            @endrole
+
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    Cerrar sesión
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                    <a href="/perfil/<?=Auth::User()->id?>">
-                                        Editar perfil
-                                    </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Cerrar sesión
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         @endif
                     </ul>

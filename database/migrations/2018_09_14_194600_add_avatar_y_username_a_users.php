@@ -15,8 +15,7 @@ class AddAvatarYUsernameAUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->unique();
-            $table->string('ci')->unique();
-            $table->string('avatar')->nulleable()->default('');     
+            $table->string('ci')->unique(); 
         });
     }
 
@@ -30,7 +29,6 @@ class AddAvatarYUsernameAUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('username');
             $table->dropColumn('ci');
-            $table->dropColumn('avatar');
         });
     }
 }

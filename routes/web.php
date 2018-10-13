@@ -39,3 +39,4 @@ Route::post('/registro','AdminController@registro');
 Route::get('/perfil','perfilController@list')->middleware('auth')->name('perfil');
 Route::get('/perfil/{user}','perfilController@show')->middleware('auth');
 Route::post('/perfil','perfilController@edit')->middleware('auth')->name('edit-perfil');
+Route::post('/perfil-preguntas','perfilController@editPreguntas')->middleware('auth')->name('edit-perfil-preguntas');
