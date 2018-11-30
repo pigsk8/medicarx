@@ -12,7 +12,7 @@ class perfilController extends Controller
 {
     public function list()
     {
-        $users = User::paginate(2);
+        $users = User::with('estado_usuario')->get();
         return view('perfil.list')
         ->with('users',$users);
     }

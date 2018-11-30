@@ -6,7 +6,6 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
 
 /**
@@ -19,4 +18,23 @@ Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: '#app'
+});
+
+$(document).ready(function () {
+    $('#dt').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ usuarios",
+            "zeroRecords": "No encontrado",
+            "info": "mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay resultados",
+            "infoFiltered": "(filtrado de _MAX_ usuarios)",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+        }
+    });
 });
