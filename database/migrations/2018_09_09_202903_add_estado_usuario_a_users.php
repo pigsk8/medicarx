@@ -14,7 +14,7 @@ class AddEstadoUsuarioAUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('estado_usuario_id')->unsigned()->default(2);
+            $table->integer('estado_usuario_id')->unsigned()->default(1);
 
             $table->foreign('estado_usuario_id')->references('id')->on('estado_usuarios');
         });

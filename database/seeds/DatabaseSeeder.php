@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);   
         //estados
-        $user_state2 = new \App\EstadoUsuario();
-        $user_state2->descripcion = 'activo';
-        $user_state2->save();    
+        $user_state = new \App\EstadoUsuario();
+        $user_state->descripcion = 'activo';
+        $user_state->save();    
 
-        $user_state3 = new \App\EstadoUsuario();
-        $user_state3->descripcion = 'inactivo';
-        $user_state3->save();  
+        $user_state2 = new \App\EstadoUsuario();
+        $user_state2->descripcion = 'inactivo';
+        $user_state2->save();  
         
         $c_state = new \App\EstadoConsulta();
         $c_state->descripcion = 'pendiente';
@@ -27,6 +27,14 @@ class DatabaseSeeder extends Seeder
         
         $c_state2 = new \App\EstadoConsulta();
         $c_state2->descripcion = 'revisada';
+        $c_state2->save();
+
+        $c_state = new \App\Estudio();
+        $c_state->descripcion = 'torax';
+        $c_state->save();
+
+        $c_state2 = new \App\Estudio();
+        $c_state2->descripcion = 'craneo';
         $c_state2->save(); 
 
         //preguntas
@@ -66,10 +74,8 @@ class DatabaseSeeder extends Seeder
             'ci' => '111111',
             'email' => 'admin@mail.com',
             'password' => bcrypt('admin'),
-            'avatar' => '',
             'estado_usuario_id' => 1
             ]);
-        //$adminUser->save();
         $adminUser->attachRole($admin);
 
         $pacienteUser = \App\User::create([
@@ -78,7 +84,6 @@ class DatabaseSeeder extends Seeder
             'ci' => '222222',
             'email' => 'paciente@mail.com',
             'password' => bcrypt('paciente'),
-            'avatar' => '',
             'estado_usuario_id' => 1
             ]);
         $pacienteUser->attachRole($paciente);
@@ -89,7 +94,6 @@ class DatabaseSeeder extends Seeder
             'ci' => '3333333',
             'email' => 'medico@mail.com',
             'password' => bcrypt('medico'),
-            'avatar' => '',
             'estado_usuario_id' => 1
             ]);
         $medicoUser->attachRole($medico);

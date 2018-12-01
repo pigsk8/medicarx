@@ -18,7 +18,7 @@
             @foreach ($users as $user)
             <?php $roles = $user->roles()->get(); ?> 
             <tr>
-                <td>{{ $user->name }}</td>
+            <td><a href="{{ route('perfil-user', ['user' => $user->id ]) }}">{{ $user->name }}</a></td>
                 <td>
                     @forelse( $roles as $role )
                         {{ $role->name }}</span>  

@@ -37,6 +37,11 @@ Route::post('/registro','AdminController@registro');
 
 //perfil usuarios
 Route::get('/perfil','perfilController@list')->middleware('auth')->name('perfil');
-Route::get('/perfil/{user}','perfilController@show')->middleware('auth');
+Route::get('/perfil/{user}','perfilController@show')->middleware('auth')->name('perfil-user');
 Route::post('/perfil','perfilController@edit')->middleware('auth')->name('edit-perfil');
 Route::post('/perfil-preguntas','perfilController@editPreguntas')->middleware('auth')->name('edit-perfil-preguntas');
+
+//consultas
+Route::get('/consulta', 'ConsultaController@create')->middleware('auth')->name('consulta-crear');
+Route::post('/consulta', 'ConsultaController@save')->middleware('auth')->name('consulta-save');
+

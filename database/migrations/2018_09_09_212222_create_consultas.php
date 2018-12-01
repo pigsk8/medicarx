@@ -17,10 +17,10 @@ class CreateConsultas extends Migration
             $table->increments('id');
             $table->integer('user_medico_id')->unsigned();
             $table->integer('user_paciente_id')->unsigned();
-            $table->string('diagnostico',250);
+            $table->string('diagnostico',250)->nullable();
             $table->date('fecha_solicitud');
-            $table->date('fecha_entrega');
-            $table->integer('estado_consulta_id')->unsigned();
+            $table->date('fecha_entrega')->nullable();
+            $table->integer('estado_consulta_id')->unsigned()->default(1);
             
             $table->foreign('user_medico_id')->references('id')->on('users');
             $table->foreign('user_paciente_id')->references('id')->on('users');

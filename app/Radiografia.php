@@ -15,4 +15,8 @@ class Radiografia extends Model
     public function consulta(){
         return $this->belongsTo(Consulta::class);
     }
+
+    public function getImageAttribute($ruta_img){
+        return \Storage::disk('public')->url($ruta_img);
+    }
 }

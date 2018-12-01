@@ -12,6 +12,13 @@
                         <h2>Nuevas consultas</h2>
                     </div>
                 @endrole
+                @role('admin')
+                    <div>
+                        <a href="{{ route('consulta-crear') }}">
+                            <button class="btn btn-default">Nueva Consulta</button>
+                        </a>
+                    </div>
+                @endrole
             @else
                 <div>
                     <h2>Medicarx</h2>
