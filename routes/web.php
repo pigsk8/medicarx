@@ -36,10 +36,10 @@ Route::post('password/question/reset', 'Auth\ForgotPasswordController@resetPassw
 Route::post('/registro','AdminController@registro');
 
 //perfil usuarios
-Route::get('/perfil','perfilController@list')->middleware('auth')->name('perfil');
-Route::get('/perfil/{user}','perfilController@show')->middleware('auth')->name('perfil-user');
-Route::post('/perfil','perfilController@edit')->middleware('auth')->name('edit-perfil');
-Route::post('/perfil-preguntas','perfilController@editPreguntas')->middleware('auth')->name('edit-perfil-preguntas');
+Route::get('/perfil','PerfilController@list')->middleware('auth')->name('perfil');
+Route::get('/perfil/{user}','PerfilController@show')->middleware('auth')->name('perfil-user');
+Route::post('/perfil','PerfilController@edit')->middleware('auth')->name('edit-perfil');
+Route::post('/perfil-preguntas','PerfilController@editPreguntas')->middleware('auth')->name('edit-perfil-preguntas');
 
 //consultas
 Route::get('/consulta', 'ConsultaController@create')->middleware('auth')->name('consulta-crear');

@@ -26,6 +26,40 @@ $(document).ready(function () {
         }
     });
 
+    $('#dt-pendientes').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ consultas",
+            "zeroRecords": "No encontrada",
+            "info": "mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay resultados",
+            "infoFiltered": "(filtrado de _MAX_ consultas)",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+        }
+    });
+
+    $('#dt-revisadas').DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ consultas",
+            "zeroRecords": "No encontrada",
+            "info": "mostrando _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay resultados",
+            "infoFiltered": "(filtrado de _MAX_ consultas)",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+        }
+    });
+
 
     $('.selectpicker').selectpicker();
     

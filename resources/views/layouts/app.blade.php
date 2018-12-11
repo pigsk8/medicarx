@@ -30,6 +30,9 @@
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         Medicarx
+                        @if (Auth::check())
+                            <span>- Bienvenido {{ Auth::user()->name }}</span>    
+                        @endif
                     </a>
                 </div>
 
@@ -43,9 +46,6 @@
                             <li><a href="{{ route('register') }}">Registrate</a></li> --}}
                         @else
 
-                            <li>
-                                <a>Bienvenido {{ Auth::user()->name }}<span style="font-weigth: strong;"> | </span></a> 
-                            </li>
                             @role('admin')
                             <li>
                                 <a href="{{ route('perfil') }}">Usuarios</a>
