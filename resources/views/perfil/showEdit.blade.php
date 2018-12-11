@@ -11,16 +11,9 @@
         {{ session()->get('message') }}
     </div>
 @endif
-
-<h3>Editar perfil</h3>
-<h4><span class="text-capitalize">{{ $user->name }}</span></h4>
-<h4>
-    @if (empty($rol))
-        No tiene rol asociado
-    @else
-        Rol: {{ $rol[0]['display_name'] }}
-    @endif    
-</h4>
+<div class="page-header">
+    <h3>Editar perfil - <span class="text-capitalize">{{ $user->name }}</span></h3>
+</div>
 
 <div class="row">
 

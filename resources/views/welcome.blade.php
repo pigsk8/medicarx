@@ -6,13 +6,13 @@
     <div class="row">
         <div class="col-md-6">
             @if (Auth::check())
-                <h2>Bienvenido {{ Auth::user()->name }} </h2>
+                {{-- <h2>Bienvenido {{ Auth::user()->name }} </h2> --}}
                 @role(['paciente','medico'])
-                    <div>
+                    <div class="page-header">
                         <h2>Nuevas consultas</h2>
                     </div>
 
-                    <div>
+                    <div class="">
                         @if(empty($consultas_pendientes))
                         <p>No tiene consultas</p>
                         @else
@@ -20,6 +20,7 @@
                             <thead>
                                 <tr>
                                     <th>Medico</th>
+                                    <th>Paciente</th>
                                     <th>Fecha de solicitud</th>
                                     <th>Estudio</th>
                                     <th>Ir</th>
@@ -29,8 +30,14 @@
                                 @foreach ($consultas_pendientes as $consulta)
                                 <tr>
                                     <td>{{ $consulta->user_medico->name }}</td>
+                                    <td>{{ $consulta->user_paciente->name }}</td>
                                     <td>{{ $consulta->fecha_solicitud }}</td>
-                                    <td>{{ $consulta->radiografias[0]->estudio->descripcion }}</td>
+                                    
+                                    <td> 
+                                        @foreach($consulta->radiografias as $radiografia)
+                                            {{ $radiografia->estudio->descripcion }}
+                                        @endforeach
+                                    </td>
                                     <td><a href="">Ir</a></td>
                                 </tr>
                                 @endforeach
@@ -41,9 +48,17 @@
 
                 @endrole
                 @role('admin')
+                    <div class="page-header">
+                        <h2>Operaciones</h2>
+                    </div>
                     <div>
                         <a href="{{ route('consulta-crear') }}">
                             <button class="btn btn-default">Nueva Consulta</button>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{ route('consultas') }}">
+                            <button class="btn btn-default">Listar Consultas</button>
                         </a>
                     </div>
                 @endrole
@@ -65,7 +80,7 @@
                 @endrole
 
                 @role(['paciente','medico'])
-                    <div>
+                    <div class="page-header">
                         <h2>Historial de consultas</h2>
                     </div>
                     <div>
@@ -77,6 +92,7 @@
                             <thead>
                                 <tr>
                                     <th>Medico</th>
+                                    <th>Paciente</th>
                                     <th>Fecha de entregada</th>
                                     <th>Estudio</th>
                                     <th>Ir</th>
@@ -86,6 +102,7 @@
                                 @foreach ($consultas_revisadas as $consulta)
                                 <tr>
                                     <td>{{ $consulta->user_medico->name }}</td>
+                                    <td>{{ $consulta->user_paciente->name }}</td>
                                     <td>{{ $consulta->fecha_entrega }}</td>
                                     <td>
                                         @foreach($consulta->radiografias as $radiografia)

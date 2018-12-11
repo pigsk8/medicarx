@@ -4,7 +4,9 @@
 
 @role('admin')
 <div class="container">
-    <h2>Lista de usuarios</h2>
+    <div class="page-header">
+        <h2>Lista de usuarios</h2>
+    </div>
 
     <table id="dt" class="table">
         <thead>

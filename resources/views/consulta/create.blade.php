@@ -4,7 +4,7 @@
 @role('admin')
 <div class="container">
 
-    <div>
+    <div class="page-header">
         <h2>Crear Consulta</h2>
     </div>
 

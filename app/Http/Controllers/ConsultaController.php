@@ -36,4 +36,9 @@ class ConsultaController extends Controller
 
         return redirect()->back()->with('success', 'Consulta Creada');
     }
+
+    public function list(){
+        $consultas = Consulta::all();
+        return view('consulta.list')->with('consultas',$consultas);
+    }
 }
