@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\DiagnosticoRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Consulta;
 use App\Radiografia;
@@ -41,4 +44,27 @@ class ConsultaController extends Controller
         $consultas = Consulta::all();
         return view('consulta.list')->with('consultas',$consultas);
     }
+
+    public function show(Consulta $consulta)
+    {
+        $user = Auth::user();
+        if($user->id == $consulta->user_paciente_id || $user->id == $consulta->user_medico_id || $user->hasRole('admin')){
+            return view('consulta.show')
+            ->with('consulta', $consulta);
+        }else{
+            return redirect('/');
+        }
+    }
+
+    public function saveDiagnostico(DiagnosticoRequest $request, Consulta $consulta){
+
+        $consulta->fecha_entrega = date('Y-m-d H:i:s');
+        $consulta->diagnostico = $request->diagnostico;
+        $consulta->estado_consulta_id = 2;
+        $consulta->save();
+
+        return redirect()->back()->with('success', 'Consulta Diagnosticada');
+
+    }
+
 }

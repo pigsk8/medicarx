@@ -45,5 +45,7 @@ Route::post('/perfil-preguntas','PerfilController@editPreguntas')->middleware('a
 Route::get('/consulta', 'ConsultaController@create')->middleware('auth')->name('consulta-crear');
 Route::post('/consulta', 'ConsultaController@save')->middleware('auth')->name('consulta-save');
 Route::get('/consultas','ConsultaController@list')->middleware('auth')->name('consultas');
+Route::get('/consultas/{consulta}','ConsultaController@show')->middleware('auth')->name('consulta-show');
+Route::post('/consultas/{consulta}/save-diagnostico','ConsultaController@saveDiagnostico')->middleware('auth')->name('consulta-save-diagnostico');
 
 

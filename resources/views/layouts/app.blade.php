@@ -31,7 +31,7 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         Medicarx
                         @if (Auth::check())
-                            <span>- Bienvenido {{ Auth::user()->name }}</span>    
+                            <span>- Bienvenido <span class="text-capitalize">{{ Auth::user()->name }}</span></span>    
                         @endif
                     </a>
                 </div>
@@ -75,6 +75,12 @@
         </nav>
 
         @yield('content')
+
+        {{-- <div class="navbar-default">
+            <div class="container">
+                <h4 class="text-center">Medicarx</h4>
+            </div>
+        </div> --}}
     </div>
 
     <!-- Scripts -->

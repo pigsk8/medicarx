@@ -29,8 +29,8 @@
                             <tbody>
                                 @foreach ($consultas_pendientes as $consulta)
                                 <tr>
-                                    <td>{{ $consulta->user_medico->name }}</td>
-                                    <td>{{ $consulta->user_paciente->name }}</td>
+                                    <td class="text-capitalize">{{ $consulta->user_medico->name }}</td>
+                                    <td class="text-capitalize">{{ $consulta->user_paciente->name }}</td>
                                     <td>{{ $consulta->fecha_solicitud }}</td>
                                     
                                     <td> 
@@ -38,7 +38,7 @@
                                             {{ $radiografia->estudio->descripcion }}
                                         @endforeach
                                     </td>
-                                    <td><a href="">Ir</a></td>
+                                    <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">Ir</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -56,6 +56,7 @@
                             <button class="btn btn-default">Nueva Consulta</button>
                         </a>
                     </div>
+                    <br>
                     <div>
                         <a href="{{ route('consultas') }}">
                             <button class="btn btn-default">Listar Consultas</button>
@@ -84,7 +85,7 @@
                         <h2>Historial de consultas</h2>
                     </div>
                     <div>
-                        @if(empty($consultas_revisada))
+                        @if(empty($consultas_revisadas))
                             <p>No tiene consultas</p>
                         @else
 
@@ -101,15 +102,15 @@
                             <tbody>
                                 @foreach ($consultas_revisadas as $consulta)
                                 <tr>
-                                    <td>{{ $consulta->user_medico->name }}</td>
-                                    <td>{{ $consulta->user_paciente->name }}</td>
+                                    <td class="text-capitalize">{{ $consulta->user_medico->name }}</td>
+                                    <td class="text-capitalize">{{ $consulta->user_paciente->name }}</td>
                                     <td>{{ $consulta->fecha_entrega }}</td>
                                     <td>
                                         @foreach($consulta->radiografias as $radiografia)
                                         {{ $radiografia->estudio->descripcion }}
                                         @endforeach
                                     </td>
-                                    <td><a href="">Ir</a></td>
+                                    <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">Ir</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

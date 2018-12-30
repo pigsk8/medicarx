@@ -30,11 +30,11 @@ class DatabaseSeeder extends Seeder
         $c_state2->save();
 
         $c_state = new \App\Estudio();
-        $c_state->descripcion = 'torax';
+        $c_state->descripcion = 'Torax';
         $c_state->save();
 
         $c_state2 = new \App\Estudio();
-        $c_state2->descripcion = 'craneo';
+        $c_state2->descripcion = 'Craneo';
         $c_state2->save(); 
 
         //preguntas
