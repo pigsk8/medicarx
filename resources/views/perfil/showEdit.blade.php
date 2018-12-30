@@ -117,7 +117,16 @@
         <div class="panel panel-default">
             <div class="panel-heading">Actualizar preguntas</div>
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" action="/perfil-preguntas" enctype="multipart/form-data">
+                <div class="col">
+                    <p>
+                        @if($hasQuestions)
+                            El usuario ya tiene respuestas asociadas
+                        @else
+                            No tiene respuestas de seguridad
+                        @endif
+                    </p>
+                </div>
+                <form class="form-horizontal" method="POST" action="/perfil-preguntas">
                     {{ csrf_field() }}
                     <input type="hidden" name="user_id" value="{{$user->id}}">
 
@@ -156,6 +165,48 @@
                 </form> 
             </div>
         </div>
+
+        @role('admin') 
+        <div class="panel panel-default">
+            <div class="panel-heading">Actualizar estado</div>
+            <div class="panel-body">
+                <div class="col">
+                    <p>
+                        Estado actual: {{$user->estado_usuario->descripcion}}
+                    </p>
+                </div>
+                <form class="form-horizontal" method="POST" action="{{Route('edit-perfil-estado')}}">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="user_id" value="{{$user->id}}">
+                    <div class="form-group">
+
+                        <label for="estado_user" class="col-md-4 control-label">Seleccionar estado</label>
+                        <div class="col-md-6">
+                            <select name="estado_user" id="estado_user" class="form-control">
+                            
+                            @forelse($estados as $estado)       
+                                    <option value="{{$estado->id}}" @if($user->estado_usuario_id == $estado->id)  {{'selected'}} @endif>{{$estado->descripcion}}</option>
+                            @empty
+                                No hay estados
+                            @endforelse
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary">
+                                Actualizar
+                            </button>
+                        </div>
+                    </div>
+
+                </form> 
+            </div>
+        </div>
+        @endrole
+
     </div>
 
 </div>

@@ -62,6 +62,12 @@
                             <button class="btn btn-default">Listar Consultas</button>
                         </a>
                     </div>
+                    <br>
+                    <div>
+                        <a href="{{ route('perfil') }}">
+                            <button class="btn btn-default">Listar Usuarios</button>
+                        </a>
+                    </div>
                 @endrole
             @else
                 <div>

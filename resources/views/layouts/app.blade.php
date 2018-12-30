@@ -46,11 +46,6 @@
                             <li><a href="{{ route('register') }}">Registrate</a></li> --}}
                         @else
 
-                            @role('admin')
-                            <li>
-                                <a href="{{ route('perfil') }}">Usuarios</a>
-                            </li>
-                            @endrole
                             @role(['admin','medico'])
                             <li>
                                 <a href="/perfil/<?=Auth::User()->id?>">Editar perfil</a>

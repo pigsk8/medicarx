@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Registro</div>
+    <div class="panel-heading">Registrar</div>
 
     <div class="panel-body">
         @if (Auth::guest())
