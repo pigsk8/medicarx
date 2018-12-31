@@ -41,6 +41,7 @@ Route::get('/perfil/{user}','PerfilController@show')->middleware('auth')->name('
 Route::post('/perfil','PerfilController@edit')->middleware('auth')->name('edit-perfil');
 Route::post('/perfil-preguntas','PerfilController@editPreguntas')->middleware('auth')->name('edit-perfil-preguntas');
 Route::post('/perfil-estado','PerfilController@editEstado')->middleware('auth')->name('edit-perfil-estado');
+Route::post('/perfil-password','PerfilController@editPass')->middleware('auth')->name('edit-perfil-password');
 
 //consultas
 Route::get('/consulta', 'ConsultaController@create')->middleware('auth')->name('consulta-crear');

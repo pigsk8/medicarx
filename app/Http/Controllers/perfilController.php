@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PasswordRequest;
+use Hash;
 use App\User;
 use App\Role;
 use App\Pregunta;
@@ -81,6 +83,25 @@ class perfilController extends Controller
         $userEdit->save();
 
         return redirect()->back()->with('message', 'Estado Actualizado');
+
+    }
+
+    public function editPass(PasswordRequest $request){
+        
+        $user = User::find($request->user_id);
+
+        if (Hash::check($request->old_password, $user->password)) {
+            if($request->old_password == $request->password){
+                return redirect()->back()->with('messagePass', 'La contraseña nueva no puede ser igual a la actual');
+            }else{
+                $user->password = bcrypt($request->password);
+                $user->save();
+                return redirect()->back()->with('message', 'La contraseña ha sido actualizada');
+            }
+        }else{
+            return redirect()->back()->with('messagePass', 'La contraseña actual no coincide');
+        }
+        die();
 
     }
 }

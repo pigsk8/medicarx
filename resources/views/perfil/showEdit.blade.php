@@ -111,6 +111,59 @@
                 </form>
             </div>
         </div>
+
+        <div class="panel panel-default">
+                <div class="panel-heading">Actualizar contraseña</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" method="POST" action="{{Route('edit-perfil-password')}}">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="user_id" value="{{$user->id}}">
+
+                        @if (session()->has('messagePass'))
+                        <div class="alert alert-danger text-center">
+                            {{ session()->get('messagePass') }}
+                        </div>
+                        @endif
+
+                        <div class="form-group">
+                            <label for="old_password" class="col-md-4 control-label">Contraseña actual</label>
+                            <div class="col-md-6">
+                                <input id="old_password" type="password" class="form-control" name="old_password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">Nueva contraseña</label>          
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password">
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="password-confirm" class="col-md-4 control-label">Confirmar contraseña</label>
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Actualizar
+                                </button>
+                            </div>
+                        </div>
+    
+                    </form> 
+                </div>
+            </div>
+
+
     </div>
 
     <div class="col-sm-6">
