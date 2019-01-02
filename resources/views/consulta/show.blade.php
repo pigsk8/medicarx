@@ -31,7 +31,7 @@
     @foreach($consulta->radiografias as $radiografia)
     <p>Tipo de estudio: <span class="text-capitalize">{{$radiografia->estudio->descripcion}}</span></p>
     <figure>
-        <img src="{{ Storage::disk('public')->url($radiografia->ruta_img) }}" alt="" width="40%">
+        <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="40%">
     </figure> 
     
     
