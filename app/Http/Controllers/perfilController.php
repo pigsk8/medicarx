@@ -11,7 +11,7 @@ use App\Pregunta;
 use App\EstadoUsuario;
 use Illuminate\Support\Facades\Auth;
 
-class perfilController extends Controller
+class PerfilController extends Controller
 {
     public function list()
     {
