@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\DiagnosticoRequest;
+use App\Http\Requests\ConsultaRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\User;
@@ -21,7 +22,7 @@ class ConsultaController extends Controller
         ->with('estudios',$estudios);
     }
 
-    public function save(Request $request){
+    public function save(ConsultaRequest $request){
 
         $consulta = new Consulta();
         $consulta->user_medico_id = $request->medico;

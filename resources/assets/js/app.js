@@ -63,5 +63,7 @@ $(document).ready(function () {
 
     $('.selectpicker').selectpicker();
     
+
+    $('.filter-option-inner-inner').addClass('text-capitalize');
 });
 

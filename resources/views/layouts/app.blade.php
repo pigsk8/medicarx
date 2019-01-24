@@ -18,14 +18,15 @@
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-
                     <!-- Collapsed Hamburger -->
+                    @if (Auth::check())
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    @endif
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -36,49 +37,38 @@
                     </a>
                 </div>
 
+                @if (Auth::check())
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="{{ route('index') }}">Inicio</a>
+                        </li>
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            {{-- <li><a href="{{ route('login') }}">Inicia Sesión</a></li>
-                            <li><a href="{{ route('register') }}">Registrate</a></li> --}}
-                        @else
+                        <li>
+                            <a href="/perfil/<?=Auth::User()->id?>">Editar perfil</a>
+                        </li>
 
-                            @role(['admin','medico'])
-                            <li>
-                                <a href="/perfil/<?=Auth::User()->id?>">Editar perfil</a>
-                            </li>
-                            @endrole
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                Cerrar sesión
+                            </a>
 
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    Cerrar sesión
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        @endif
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
                     </ul>
                 </div>
+                @endif
             </div>
         </nav>
 
         @yield('content')
 
-        {{-- <div class="navbar-default">
-            <div class="container">
-                <h4 class="text-center">Medicarx</h4>
-            </div>
-        </div> --}}
     </div>
-
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

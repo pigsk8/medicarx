@@ -18,10 +18,14 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label for="select-paciente">Seleccione paciente:</label>
-            <select class="selectpicker form-control" data-live-search="true" name="paciente" id="select-paciente">
+            <select class="selectpicker form-control text-capitalize" data-live-search="true" name="paciente" id="select-paciente">
                 @foreach ($users as $user)
                     @if ($user->roles->get(0)['name'] == 'paciente')
-                    <option data-tokens="{{ $user->ci }} {{ $user->username }}" value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option 
+                        data-tokens="{{ $user->ci }} {{ $user->username }}" 
+                        value="{{ $user->id }}"
+                        class="text-capitalize"                    
+                    >{{ $user->name }}</option>
                     @endif
                 @endforeach
             </select>
@@ -29,10 +33,14 @@
 
         <div class="form-group">
             <label for="select-medico">Seleccione medico:</label>
-            <select class="selectpicker form-control" data-live-search="true" name="medico" id="select-medico">
+            <select class="selectpicker form-control text-capitalize" data-live-search="true" name="medico" id="select-medico">
                 @foreach ($users as $user)
                     @if ($user->roles->get(0)['name'] == 'medico')
-            <option data-tokens="{{ $user->ci }} {{ $user->username }}" value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option 
+                        data-tokens="{{ $user->ci }} {{ $user->username }}" 
+                        value="{{ $user->id }}" 
+                        class="text-capitalize"                    
+                    >{{ $user->name }}</option>
                     @endif
                 @endforeach
             </select>
@@ -45,9 +53,9 @@
 
         <div class="form-group">
             <label for="select-estudio">Seleccione tipo de estudio:</label>
-            <select class="form-control" name="estudio" id="select-estudio">
+            <select class="form-control text-capitalize" name="estudio" id="select-estudio">
                 @foreach ($estudios as $estudio)
-                    <option value="{{ $estudio->id }}">{{ $estudio->descripcion }}</option>
+                    <option value="{{ $estudio->id }}" {{ (old("estudio") == $estudio->id ? "selected":"") }} class="text-capitalize">{{ $estudio->descripcion }}</option>
                 @endforeach
             </select>
         </div>
@@ -56,6 +64,13 @@
 
     </form>
 
+    @if($errors->any())
+    <ul>
+    @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+    @endforeach
+    </ul>
+@endif
 
 </div>
 @endrole

@@ -19,6 +19,7 @@
 
     <div class="col-sm-6">
 
+        @role(['admin','medico'])
         <div class="panel panel-default">
             <div class="panel-heading">Actualizar perfil</div>
             <div class="panel-body">
@@ -111,6 +112,7 @@
                 </form>
             </div>
         </div>
+        @endrole
 
         <div class="panel panel-default">
                 <div class="panel-heading">Actualizar contraseña</div>

@@ -12,7 +12,7 @@
 */
 
 //Raiz-index
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->name('index');
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
