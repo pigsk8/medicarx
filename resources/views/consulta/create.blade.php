@@ -13,8 +13,10 @@
             {{ session()->get('success') }}
         </div>
     @endif
+    
+    <div id="status"></div>
 
-    <form action="{{ route('consulta-save') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('consulta-save') }}" method="POST" enctype="multipart/form-data" id="form-upload-file">
         {{ csrf_field() }}
         <div class="form-group">
             <label for="select-paciente">Seleccione paciente:</label>
@@ -48,8 +50,16 @@
 
         <div class="form-group">
             <label for="select-fecha">Subir imagen radiografica:</label>
-            <input type="file" class="form-control-file" name="img-rad">
+            <input type="file" class="form-control-file" name="img-rad" id="img-rad" placeholder="Subir imagen">
         </div>
+
+        <div class="progress">
+            <div class="bar"></div >
+            <div class="percent">0%</div >
+        </div>
+
+        
+
 
         <div class="form-group">
             <label for="select-estudio">Seleccione tipo de estudio:</label>
@@ -64,13 +74,16 @@
 
     </form>
 
-    @if($errors->any())
-    <ul>
-    @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-    @endforeach
-    </ul>
-@endif
+    <br>
+    @if($errors->any())   
+    <div class="alert alert-danger">
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+    @endif
 
 </div>
 @endrole

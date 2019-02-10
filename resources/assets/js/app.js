@@ -9,6 +9,7 @@ require('./bootstrap');
 
 $(document).ready(function () {
 
+    /**Data Tables */
     $('#dt').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ usuarios",
@@ -61,9 +62,65 @@ $(document).ready(function () {
     });
 
 
+    /**  Select Dropdown Search*/
     $('.selectpicker').selectpicker();
-    
-
     $('.filter-option-inner-inner').addClass('text-capitalize');
+
+    /** Progres Bar Upload File Consulta */
+    function validate(formData, jqForm, options) {
+        var form = jqForm[0];
+        if (!form.file.value) {
+            alert('File not found');
+            return false;
+        }
+    }
+
+    (function() {
+
+        var bar = $('.bar');
+        var percent = $('.percent');
+        var status = $('#status');
+        var inputFile = $('#img-rad');
+    
+        $('#form-upload-file').ajaxForm({
+            beforeSend: function() {
+                status.empty();
+                var percentVal = '0%';
+                bar.width(percentVal);
+                percent.html(percentVal);
+            },
+            uploadProgress: function(event, position, total, percentComplete) {
+                var percentVal = percentComplete + '%';
+                bar.width(percentVal);
+                percent.html(percentVal);
+            },
+            success: function() {
+                var percentVal = 'Espere, Guardando';
+                bar.width(percentVal)
+                percent.html(percentVal);
+            },
+            complete: function(xhr) {
+                var msj='';
+                if(xhr.status == 422){
+                    for(var i in xhr.responseJSON){  
+                        console.log()
+                        for(var j in xhr.responseJSON[i]){
+                            msj=msj+'<p>'+xhr.responseJSON[i][j]+'</p>';
+                        }
+                    }
+                    status.html('<div class="alert alert-danger">'+msj+'</div>');
+                }else if(xhr.status == 200){
+                    status.html('<div class="alert alert-success">Consulta creada</div>');
+                    var percentVal = '0%';
+                    bar.width(percentVal);
+                    percent.html(percentVal);
+                    inputFile.val(''); 
+                }else{
+                    status.html('<div class="alert alert-danger">Error desconocido, actualiza e intenta de nuevo</div>');
+                }
+            }
+        });
+
+    })();
 });
 

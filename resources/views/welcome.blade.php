@@ -77,6 +77,8 @@
                 </div>
             @endif
 
+            <br>
+
         </div>
         <div class="col-md-6">
             @if (Auth::guest())

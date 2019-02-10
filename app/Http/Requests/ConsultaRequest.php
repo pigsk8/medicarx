@@ -24,7 +24,7 @@ class ConsultaRequest extends FormRequest
     public function rules()
     {
         return [
-            'img-rad' => 'required|mimes:jpeg,bmp,png|size:20',
+            'img-rad' => 'required|mimes:jpeg,png|max:1024',
             'paciente' => 'required',
             'medico' => 'required',
             'estudio' => 'required',
@@ -34,8 +34,8 @@ class ConsultaRequest extends FormRequest
     {
         return [
             'img-rad.required' => 'La imagen radiografica es obligatoria',
-            'img-rad.mimes' => 'El tipo de archivo aceptado es jpeg,bmp,png',
-            'img-rad.size' => 'El tamaño de la iamgen supera los 2MB',
+            'img-rad.mimes' => 'El tipo de archivo aceptado es jpeg o png',
+            'img-rad.max' => 'El tamaño de la imagen supera 1MB',
             'paciente.required' => 'El paciente es obligatorio',
             'medico.required' => 'El medico es obligatorio',
             'estudio.required' => 'El tipo de estudio es obligatorio',

@@ -31,14 +31,14 @@ class ConsultaController extends Controller
         $consulta->save();
 
         $image = $request->file('img-rad');
-        
+
         $radiografia = new Radiografia();
         $radiografia->ruta_img = $image->store('radiografias', 'public');
         $radiografia->consulta_id = $consulta->id;
         $radiografia->estudio_id = $request->estudio;
         $radiografia->save();
 
-        return redirect()->back()->with('success', 'Consulta Creada');
+        return response()->json(['success'=>'Consulta creada.']);
     }
 
     public function list(){
