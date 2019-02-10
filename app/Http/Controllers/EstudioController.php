@@ -71,7 +71,11 @@ class EstudioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $estudio = Estudio::find($id);
+        $estudio->descripcion = $request->descripcion;
+        $estudio->save();
+
+        return redirect()->back()->with('success', 'Estudio modificado');
     }
 
     /**

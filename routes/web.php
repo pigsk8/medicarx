@@ -45,6 +45,7 @@ Route::post('/perfil-password','PerfilController@editPass')->middleware('auth')-
 
 //estudios
 Route::get('estudio','EstudioController@index')->middleware('auth')->name('estudio-index');
+Route::post('estudio/{estudio}','EstudioController@update')->middleware('auth')->name('estudio-update');
 
 // POST      | estudio                               | estudio.store             | App\Http\Controllers\EstudioController@store                             | web          |
 // |        | GET|HEAD  | estudio                               | estudio.index             | App\Http\Controllers\EstudioController@index                             | web          |
