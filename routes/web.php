@@ -43,11 +43,23 @@ Route::post('/perfil-preguntas','PerfilController@editPreguntas')->middleware('a
 Route::post('/perfil-estado','PerfilController@editEstado')->middleware('auth')->name('edit-perfil-estado');
 Route::post('/perfil-password','PerfilController@editPass')->middleware('auth')->name('edit-perfil-password');
 
+//estudios
+Route::get('estudio','EstudioController@index')->middleware('auth')->name('estudio-index');
+
+// POST      | estudio                               | estudio.store             | App\Http\Controllers\EstudioController@store                             | web          |
+// |        | GET|HEAD  | estudio                               | estudio.index             | App\Http\Controllers\EstudioController@index                             | web          |
+// |        | GET|HEAD  | estudio/create                        | estudio.create            | App\Http\Controllers\EstudioController@create                            | web          |
+// |        | DELETE    | estudio/{estudio}                     | estudio.destroy           | App\Http\Controllers\EstudioController@destroy                           | web          |
+// |        | PUT|PATCH | estudio/{estudio}                     | estudio.update            | App\Http\Controllers\EstudioController@update                            | web          |
+// |        | GET|HEAD  | estudio/{estudio}                     | estudio.show              | App\Http\Controllers\EstudioController@show                              | web          |
+// |        | GET|HEAD  | estudio/{estudio}/edit                | estudio.edit      
+
 //consultas
 Route::get('/consulta', 'ConsultaController@create')->middleware('auth')->name('consulta-crear');
 Route::post('/consulta', 'ConsultaController@save')->middleware('auth')->name('consulta-save');
 Route::get('/consultas','ConsultaController@list')->middleware('auth')->name('consultas');
 Route::get('/consultas/{consulta}','ConsultaController@show')->middleware('auth')->name('consulta-show');
+Route::post('/consultas/delete/{consulta}','ConsultaController@delete')->middleware('auth')->name('consulta-delete');
 Route::post('/consultas/{consulta}/save-diagnostico','ConsultaController@saveDiagnostico')->middleware('auth')->name('consulta-save-diagnostico');
 
 

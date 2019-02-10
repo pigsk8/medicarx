@@ -38,7 +38,7 @@ class ConsultaController extends Controller
         $radiografia->estudio_id = $request->estudio;
         $radiografia->save();
 
-        return response()->json(['success'=>'Consulta creada.']);
+        return response()->json(['success'=>'Consulta creada']);
     }
 
     public function list(){
@@ -57,6 +57,11 @@ class ConsultaController extends Controller
         }
     }
 
+    public function delete(Consulta $consulta){
+        $consulta->delete();
+        return redirect()->back()->with('success', 'Consulta eliminada');
+    }
+
     public function saveDiagnostico(DiagnosticoRequest $request, Consulta $consulta){
 
         $consulta->fecha_entrega = date('Y-m-d H:i:s');
@@ -64,7 +69,7 @@ class ConsultaController extends Controller
         $consulta->estado_consulta_id = 2;
         $consulta->save();
 
-        return redirect()->back()->with('success', 'Consulta Diagnosticada');
+        return redirect()->back()->with('success', 'Diagnostico realizado');
 
     }
 

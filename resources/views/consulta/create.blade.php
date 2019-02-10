@@ -49,8 +49,9 @@
         </div>
 
         <div class="form-group">
-            <label for="select-fecha">Subir imagen radiografica:</label>
-            <input type="file" class="form-control-file" name="img-rad" id="img-rad" placeholder="Subir imagen">
+            <label class="btn btn-default" for="img-rad">Subir imagen radiografica </label>
+            <input type="file" class="form-control-file" name="img-rad" id="img-rad">
+            <div id="name-file"></div>
         </div>
 
         <div class="progress">

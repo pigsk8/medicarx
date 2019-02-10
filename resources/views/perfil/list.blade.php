@@ -8,7 +8,7 @@
         <h2>Lista de usuarios</h2>
     </div>
 
-    <table id="dt" class="table">
+    <table id="dt-user" class="table">
         <thead>
             <tr>
                 <th>Nombre</th>

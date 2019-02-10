@@ -19,26 +19,40 @@
                         <table id="dt-pendientes" class="table">
                             <thead>
                                 <tr>
+                                    <th class="td-id">Id</th>
+                                    @role('paciente')
                                     <th>Medico</th>
+                                    @endrole
+                                    @role('medico')
                                     <th>Paciente</th>
+                                    @endrole
                                     <th>Fecha de solicitud</th>
                                     <th>Estudio</th>
-                                    <th>Ir</th>
+                                    <th>Ver</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($consultas_pendientes as $consulta)
                                 <tr>
+                                    <td class="td-id">{{ $consulta->id }}</td>
+                                    @role('paciente')
                                     <td class="text-capitalize">{{ $consulta->user_medico->name }}</td>
+                                    @endrole
+                                    @role('medico')
                                     <td class="text-capitalize">{{ $consulta->user_paciente->name }}</td>
+                                    @endrole
                                     <td>{{ $consulta->fecha_solicitud }}</td>
                                     
-                                    <td> 
+                                    <td class="text-capitalize"> 
                                         @foreach($consulta->radiografias as $radiografia)
                                             {{ $radiografia->estudio->descripcion }}
                                         @endforeach
                                     </td>
-                                    <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">Ir</a></td>
+                                    <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">
+                                        <button type="button" class="btn btn-info">
+                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                        </button>
+                                    </a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -100,25 +114,39 @@
                         <table id="dt-revisadas" class="table">
                             <thead>
                                 <tr>
+                                    <th class="td-id">Id</th>
+                                    @role('paciente')
                                     <th>Medico</th>
+                                    @endrole
+                                    @role('medico')
                                     <th>Paciente</th>
+                                    @endrole
                                     <th>Fecha de entregada</th>
                                     <th>Estudio</th>
-                                    <th>Ir</th>
+                                    <th>Ver</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($consultas_revisadas as $consulta)
                                 <tr>
+                                    <td class="td-id">{{ $consulta->id }}</td>
+                                    @role('paciente')
                                     <td class="text-capitalize">{{ $consulta->user_medico->name }}</td>
+                                    @endrole
+                                    @role('medico')
                                     <td class="text-capitalize">{{ $consulta->user_paciente->name }}</td>
+                                    @endrole
                                     <td>{{ $consulta->fecha_entrega }}</td>
-                                    <td>
+                                    <td class="text-capitalize">
                                         @foreach($consulta->radiografias as $radiografia)
                                         {{ $radiografia->estudio->descripcion }}
                                         @endforeach
                                     </td>
-                                    <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">Ir</a></td>
+                                    <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">
+                                        <button type="button" class="btn btn-info">
+                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                        </button>
+                                    </a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

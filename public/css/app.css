@@ -9045,3 +9045,8 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
   color: #7F98B2;
 }
 
+#img-rad,
+.td-id {
+  display: none;
+}
+

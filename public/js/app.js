@@ -10458,7 +10458,9 @@ __webpack_require__(3);
 $(document).ready(function () {
 
     /**Data Tables */
+    /**dt list consultas admin */
     $('#dt').DataTable({
+        "order": [0, 'desc'],
         "language": {
             "lengthMenu": "Mostrar _MENU_ usuarios",
             "zeroRecords": "No encontrado",
@@ -10475,6 +10477,7 @@ $(document).ready(function () {
         }
     });
 
+    /**dt welcome page (paciente,medico) */
     $('#dt-pendientes').DataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ consultas",
@@ -10514,6 +10517,13 @@ $(document).ready(function () {
     $('.filter-option-inner-inner').addClass('text-capitalize');
 
     /** Progres Bar Upload File Consulta */
+
+    var inputFile = $('#img-rad');
+
+    inputFile.change(function () {
+        $('#name-file').html(inputFile.val());
+    });
+
     function validate(formData, jqForm, options) {
         var form = jqForm[0];
         if (!form.file.value) {
@@ -10527,7 +10537,6 @@ $(document).ready(function () {
         var bar = $('.bar');
         var percent = $('.percent');
         var status = $('#status');
-        var inputFile = $('#img-rad');
 
         $('#form-upload-file').ajaxForm({
             beforeSend: function beforeSend() {
@@ -10556,12 +10565,18 @@ $(document).ready(function () {
                         }
                     }
                     status.html('<div class="alert alert-danger">' + msj + '</div>');
+                    var percentVal = '0%';
+                    bar.width(percentVal);
+                    percent.html(percentVal);
+                    inputFile.val('');
+                    $('#name-file').html(inputFile.val());
                 } else if (xhr.status == 200) {
                     status.html('<div class="alert alert-success">Consulta creada</div>');
                     var percentVal = '0%';
                     bar.width(percentVal);
                     percent.html(percentVal);
                     inputFile.val('');
+                    $('#name-file').html(inputFile.val());
                 } else {
                     status.html('<div class="alert alert-danger">Error desconocido, actualiza e intenta de nuevo</div>');
                 }
