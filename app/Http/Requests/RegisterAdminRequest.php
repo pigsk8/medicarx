@@ -28,6 +28,7 @@ class RegisterAdminRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'ci' => 'required|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'role' => 'required',
         ];
     }
     public function messages()
@@ -38,6 +39,7 @@ class RegisterAdminRequest extends FormRequest
             'password.required' => 'La contraseña es requerida',
             'password.min' => 'La contraseña debe ser mayor a 6 caracteres',
             'password.confirmed' => 'Las contraseñas no son iguales',
+            'role' => 'Debe asignar un rol al usuario',
         ];
     }
 }

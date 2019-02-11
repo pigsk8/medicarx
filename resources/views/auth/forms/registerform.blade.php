@@ -95,12 +95,17 @@
                 <label for="role" class="col-md-4 control-label">Rol</label>
 
                 <div class="col-md-6">
-                    <select class="form-control" name="role" id="role">
-                        <option value="0"></option>
-                        @foreach($roles as $rol)
+                    <select class="form-control" name="role" id="role" required>
+                        @foreach($roles->sortByDesc('display_name') as $rol)
                         <option value="{{$rol->id}}">{{$rol->display_name}}</option>
                         @endforeach
                     </select>
+
+                    @if ($errors->has('role'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('role') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
             @endif

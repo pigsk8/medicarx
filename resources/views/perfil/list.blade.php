@@ -8,6 +8,24 @@
         <h2>Lista de usuarios</h2>
     </div>
 
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
+    @if(session()->has('warning'))
+        <div class="alert alert-warning">
+            {{ session()->get('warning') }}
+        </div>
+    @endif
+
+    @if(session()->has('danger'))
+        <div class="alert alert-danger">
+            {{ session()->get('danger') }}
+        </div>
+    @endif
+
     <table id="dt-user" class="table">
         <thead>
             <tr>
@@ -15,6 +33,7 @@
                 <th>Rol</th>
                 <th>Estado</th>
                 <th>Ver</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -35,17 +54,25 @@
                         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                     </button>
                 </a></td>
+                <td>
+                    @if(Auth::user()->id==$user->id)
+                    <button type="disable" class="btn btn-disable">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                    @else
+                    <form action="{{ route('perfil.destroy', ['user' => $user->id])}}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-
-
-{{-- 
-    <figure>
-        <img src="{{ Storage::disk('public')->url($user->avatar) }}" alt="" width="150px" height="150px">
-    </figure> 
---}}
 
 </div>
 @endrole

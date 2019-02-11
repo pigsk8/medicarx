@@ -43,6 +43,8 @@ Route::post('/perfil-preguntas','PerfilController@editPreguntas')->middleware('a
 Route::post('/perfil-estado','PerfilController@editEstado')->middleware('auth')->name('edit-perfil-estado');
 Route::post('/perfil-password','PerfilController@editPass')->middleware('auth')->name('edit-perfil-password');
 
+Route::delete('perfiles/{user}','PerfilController@destroy')->middleware('auth')->name('perfil.destroy');
+
 //estudios
 Route::get('estudios','EstudioController@index')->middleware('auth')->name('estudio.index');
 Route::post('estudios','EstudioController@store')->middleware('auth')->name('estudio.store');

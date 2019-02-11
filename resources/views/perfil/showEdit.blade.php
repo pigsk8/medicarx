@@ -220,6 +220,7 @@
         </div>
 
         @role('admin') 
+        @if(!(Auth::user()->id==$user->id))
         <div class="panel panel-default">
             <div class="panel-heading">Actualizar estado</div>
             <div class="panel-body">
@@ -258,6 +259,7 @@
                 </form> 
             </div>
         </div>
+        @endif
         @endrole
 
     </div>

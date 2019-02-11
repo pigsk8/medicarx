@@ -45,20 +45,20 @@ class DatabaseSeeder extends Seeder
         $admin = new \App\Role();
         $admin->name = 'admin';
         $admin->display_name = 'Administrator'; // optional
-        $admin->description = 'User is allowed to manage all resources'; // optional
+        $admin->description = 'Usuario administrador'; // optional
         $admin->save();
         
-        // $paciente = new \App\Role();
-        // $paciente->name = 'paciente';
-        // $paciente->display_name = 'Paciente'; // optional
-        // $paciente->description = 'paciente'; // optional
-        // $paciente->save();
+        $paciente = new \App\Role();
+        $paciente->name = 'paciente';
+        $paciente->display_name = 'Paciente'; // optional
+        $paciente->description = 'Usuario paciente'; // optional
+        $paciente->save();
 
-        // $medico = new \App\Role();
-        // $medico->name = 'medico';
-        // $medico->display_name = 'Medico'; // optional
-        // $medico->description = 'medico'; // optional
-        // $medico->save();
+        $medico = new \App\Role();
+        $medico->name = 'medico';
+        $medico->display_name = 'Medico'; // optional
+        $medico->description = 'Usuario medico'; // optional
+        $medico->save();
         
         $adminUser = \App\User::create([
             'name' => 'admin',

@@ -43,9 +43,9 @@
                         </button></td>
                     </form>
                     <td>
-                    <form action="{{ route('estudio.destroy', ['estudio' => $estudio->id])}}" method="POST">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
+                        <form action="{{ route('estudio.destroy', ['estudio' => $estudio->id])}}" method="POST">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </button>

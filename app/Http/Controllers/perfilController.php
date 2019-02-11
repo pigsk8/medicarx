@@ -8,6 +8,7 @@ use Hash;
 use App\User;
 use App\Role;
 use App\Pregunta;
+use App\Consulta;
 use App\EstadoUsuario;
 use Illuminate\Support\Facades\Auth;
 
@@ -102,6 +103,41 @@ class PerfilController extends Controller
             return redirect()->back()->with('messagePass', 'La contraseña actual no coincide');
         }
         die();
+
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if(!empty($user)){
+            if($user->hasRole('paciente')){
+                $consultas = Consulta::where('user_paciente_id',$user->id)->get();
+                if(count($consultas)>0){
+                    return redirect()->back()->with('warning','Usuario no se puede eliminar, se encuentra asociado a consultas');
+                }else{
+                    $user->delete();
+                    return redirect()->back()->with('success','Usuario eliminado');
+                }
+            }else if($user->hasRole('medico')){
+                $consultas = Consulta::where('user_medico_id',$user->id)->get();
+                if(count($consultas)>0){
+                    return redirect()->back()->with('warning','Usuario no se puede eliminar, se encuentra asociado a consultas');
+                }else{
+                    $user->delete();
+                    return redirect()->back()->with('success','Usuario eliminado');
+                }
+            }else{
+                $user->delete();
+                return redirect()->back()->with('success','Usuario eliminado');
+            }
+        }else{
+            return redirect()->back()->with('danger','Ha ocurrido un erro, actualiza y vuelve a intentar');            
+        }
 
     }
 }
