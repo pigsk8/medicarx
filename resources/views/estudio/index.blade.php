@@ -60,6 +60,24 @@
     <p>No hay estudios</p>
     @endif
 
+    <div class="panel panel-default">
+        <div class="panel-heading">Agregar nuevo tipo de estudio</div>
+        <div class="panel-body">
+            <form action="{{ route('estudio.store') }}" method="POST" class="form-inline"> 
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="nuevo">Tipo de estudio:</label>
+                    <input type="text" class="form-control" name="nuevo" required>
+                </div>
+                @if ($errors->has('nuevo'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('nuevo') }}</strong>
+                    </span>
+                @endif
+                <button type="submit" class="btn btn-default">Agregar</button>
+            </form>
+        </div>
+    </div>
 
 
 </div>

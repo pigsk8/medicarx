@@ -45,16 +45,9 @@ Route::post('/perfil-password','PerfilController@editPass')->middleware('auth')-
 
 //estudios
 Route::get('estudio','EstudioController@index')->middleware('auth')->name('estudio.index');
+Route::post('estudio','EstudioController@store')->middleware('auth')->name('estudio.store');
 Route::put('estudio/{estudio}','EstudioController@update')->middleware('auth')->name('estudio.update');
 Route::delete('estudio/{estudio}','EstudioController@destroy')->middleware('auth')->name('estudio.destroy');
-
-// POST      | estudio                               | estudio.store             | App\Http\Controllers\EstudioController@store                             | web          |
-// |        | GET|HEAD  | estudio                               | estudio.index             | App\Http\Controllers\EstudioController@index                             | web          |
-// |        | GET|HEAD  | estudio/create                        | estudio.create            | App\Http\Controllers\EstudioController@create                            | web          |
-// |        | DELETE    | estudio/{estudio}                     | estudio.destroy           | App\Http\Controllers\EstudioController@destroy                           | web          |
-// |        | PUT|PATCH | estudio/{estudio}                     | estudio.update            | App\Http\Controllers\EstudioController@update                            | web          |
-// |        | GET|HEAD  | estudio/{estudio}                     | estudio.show              | App\Http\Controllers\EstudioController@show                              | web          |
-// |        | GET|HEAD  | estudio/{estudio}/edit                | estudio.edit      
 
 //consultas
 Route::get('/consulta', 'ConsultaController@create')->middleware('auth')->name('consulta-crear');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\EstudioRequest;
 use App\Estudio;
 
 class EstudioController extends Controller
@@ -25,9 +26,13 @@ class EstudioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EstudioRequest $request)
     {
-        //
+        $estudio = new Estudio();
+        $estudio->descripcion = $request->nuevo;
+        $estudio->save();
+
+        return redirect()->back()->with('success','Tipo de estudio creado');
     }
 
     /**
