@@ -36,18 +36,18 @@ Route::post('password/question/reset', 'Auth\ForgotPasswordController@resetPassw
 Route::post('/registro','AdminController@registro');
 
 //perfil usuarios
-Route::get('/perfil','PerfilController@list')->middleware('auth')->name('perfil');
-Route::get('/perfil/{user}','PerfilController@show')->middleware('auth')->name('perfil-user');
+Route::get('/perfiles','PerfilController@list')->middleware('auth')->name('perfil');
+Route::get('/perfiles/{user}','PerfilController@show')->middleware('auth')->name('perfil-user');
 Route::post('/perfil','PerfilController@edit')->middleware('auth')->name('edit-perfil');
 Route::post('/perfil-preguntas','PerfilController@editPreguntas')->middleware('auth')->name('edit-perfil-preguntas');
 Route::post('/perfil-estado','PerfilController@editEstado')->middleware('auth')->name('edit-perfil-estado');
 Route::post('/perfil-password','PerfilController@editPass')->middleware('auth')->name('edit-perfil-password');
 
 //estudios
-Route::get('estudio','EstudioController@index')->middleware('auth')->name('estudio.index');
-Route::post('estudio','EstudioController@store')->middleware('auth')->name('estudio.store');
-Route::put('estudio/{estudio}','EstudioController@update')->middleware('auth')->name('estudio.update');
-Route::delete('estudio/{estudio}','EstudioController@destroy')->middleware('auth')->name('estudio.destroy');
+Route::get('estudios','EstudioController@index')->middleware('auth')->name('estudio.index');
+Route::post('estudios','EstudioController@store')->middleware('auth')->name('estudio.store');
+Route::put('estudios/{estudio}','EstudioController@update')->middleware('auth')->name('estudio.update');
+Route::delete('estudios/{estudio}','EstudioController@destroy')->middleware('auth')->name('estudio.destroy');
 
 //consultas
 Route::get('/consulta', 'ConsultaController@create')->middleware('auth')->name('consulta-crear');

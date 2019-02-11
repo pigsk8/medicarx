@@ -14,28 +14,20 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);   
         //estados
         $user_state = new \App\EstadoUsuario();
-        $user_state->descripcion = 'activo';
+        $user_state->descripcion = 'Activo';
         $user_state->save();    
 
         $user_state2 = new \App\EstadoUsuario();
-        $user_state2->descripcion = 'inactivo';
+        $user_state2->descripcion = 'Inactivo';
         $user_state2->save();  
         
         $c_state = new \App\EstadoConsulta();
-        $c_state->descripcion = 'pendiente';
+        $c_state->descripcion = 'Pendiente';
         $c_state->save();    
         
         $c_state2 = new \App\EstadoConsulta();
-        $c_state2->descripcion = 'revisada';
+        $c_state2->descripcion = 'Revisada';
         $c_state2->save();
-
-        $c_state = new \App\Estudio();
-        $c_state->descripcion = 'Torax';
-        $c_state->save();
-
-        $c_state2 = new \App\Estudio();
-        $c_state2->descripcion = 'Craneo';
-        $c_state2->save(); 
 
         //preguntas
         $preg1 = new \App\Pregunta();
@@ -56,47 +48,47 @@ class DatabaseSeeder extends Seeder
         $admin->description = 'User is allowed to manage all resources'; // optional
         $admin->save();
         
-        $paciente = new \App\Role();
-        $paciente->name = 'paciente';
-        $paciente->display_name = 'Paciente'; // optional
-        $paciente->description = 'paciente'; // optional
-        $paciente->save();
+        // $paciente = new \App\Role();
+        // $paciente->name = 'paciente';
+        // $paciente->display_name = 'Paciente'; // optional
+        // $paciente->description = 'paciente'; // optional
+        // $paciente->save();
 
-        $medico = new \App\Role();
-        $medico->name = 'medico';
-        $medico->display_name = 'Medico'; // optional
-        $medico->description = 'medico'; // optional
-        $medico->save();
+        // $medico = new \App\Role();
+        // $medico->name = 'medico';
+        // $medico->display_name = 'Medico'; // optional
+        // $medico->description = 'medico'; // optional
+        // $medico->save();
         
         $adminUser = \App\User::create([
             'name' => 'admin',
             'username' => 'admin',
-            'ci' => '111111',
+            'ci' => '000000',
             'email' => 'admin@mail.com',
             'password' => bcrypt('admin'),
             'estado_usuario_id' => 1
             ]);
         $adminUser->attachRole($admin);
 
-        $pacienteUser = \App\User::create([
-            'name' => 'paciente',
-            'username' => 'paciente',
-            'ci' => '222222',
-            'email' => 'paciente@mail.com',
-            'password' => bcrypt('paciente'),
-            'estado_usuario_id' => 1
-            ]);
-        $pacienteUser->attachRole($paciente);
+        // $pacienteUser = \App\User::create([
+        //     'name' => 'paciente',
+        //     'username' => 'paciente',
+        //     'ci' => '222222',
+        //     'email' => 'paciente@mail.com',
+        //     'password' => bcrypt('paciente'),
+        //     'estado_usuario_id' => 1
+        //     ]);
+        // $pacienteUser->attachRole($paciente);
 
-        $medicoUser = \App\User::create([
-            'name' => 'medico',
-            'username' => 'medico',
-            'ci' => '3333333',
-            'email' => 'medico@mail.com',
-            'password' => bcrypt('medico'),
-            'estado_usuario_id' => 1
-            ]);
-        $medicoUser->attachRole($medico);
+        // $medicoUser = \App\User::create([
+        //     'name' => 'medico',
+        //     'username' => 'medico',
+        //     'ci' => '3333333',
+        //     'email' => 'medico@mail.com',
+        //     'password' => bcrypt('medico'),
+        //     'estado_usuario_id' => 1
+        //     ]);
+        // $medicoUser->attachRole($medico);
         
     }
 }

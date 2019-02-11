@@ -46,7 +46,8 @@
                         </li>
                         <!-- Authentication Links -->
                         <li>
-                            <a href="/perfil/<?=Auth::User()->id?>">Editar perfil</a>
+                        <li>
+                            <a href="{{ route('perfil-user', ['user' => Auth::User()->id ]) }}">Editar perfil</a>
                         </li>
 
                         <li>

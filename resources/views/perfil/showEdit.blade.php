@@ -173,13 +173,11 @@
             <div class="panel-heading">Actualizar preguntas</div>
             <div class="panel-body">
                 <div class="col">
-                    <p>
-                        @if($hasQuestions)
-                            El usuario ya tiene respuestas asociadas
-                        @else
-                            No tiene respuestas de seguridad
-                        @endif
-                    </p>
+                    @if($hasQuestions)
+                        <p class="text-success"> El usuario ya tiene respuestas asociadas</p>
+                    @else
+                        <p class="text-danger"> El usuario no tiene respuestas de seguridad</p>
+                    @endif
                 </div>
                 <form class="form-horizontal" method="POST" action="/perfil-preguntas">
                     {{ csrf_field() }}
@@ -226,7 +224,7 @@
             <div class="panel-heading">Actualizar estado</div>
             <div class="panel-body">
                 <div class="col">
-                    <p>
+                    <p class="text-capitalize">
                         Estado actual: {{$user->estado_usuario->descripcion}}
                     </p>
                 </div>
@@ -237,7 +235,7 @@
 
                         <label for="estado_user" class="col-md-4 control-label">Seleccionar estado</label>
                         <div class="col-md-6">
-                            <select name="estado_user" id="estado_user" class="form-control">
+                            <select name="estado_user" id="estado_user" class="form-control text-capitalize">
                             
                             @forelse($estados as $estado)       
                                     <option value="{{$estado->id}}" @if($user->estado_usuario_id == $estado->id)  {{'selected'}} @endif>{{$estado->descripcion}}</option>

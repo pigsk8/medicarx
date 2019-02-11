@@ -25,6 +25,6 @@ class AdminController extends Controller
 
         $new_user->attachRole($role_entry);
 
-        return redirect('/');
+        return redirect('/perfiles/'.$new_user->id);
     }
 }
