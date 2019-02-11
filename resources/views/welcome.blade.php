@@ -82,6 +82,12 @@
                             <button class="btn btn-default">Listar Usuarios</button>
                         </a>
                     </div>
+                    <br>
+                    <div>
+                        <a href="{{ route('estudio.index') }}">
+                            <button class="btn btn-default">Gestionar Tipo de Estudio</button>
+                        </a>
+                    </div>
                 @endrole
             @else
                 <div>

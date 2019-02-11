@@ -13,6 +13,12 @@
         </div>
     @endif
 
+    @if(session()->has('warning'))
+    <div class="alert alert-warning">
+        {{ session()->get('warning') }}
+    </div>
+@endif
+
     @if(!empty($estudios))
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
@@ -27,8 +33,9 @@
             <tbody>
                 @foreach ($estudios as $estudio)
                 <tr>
-                    <form action="estudio/{{ $estudio->id }}" method="POST"> 
+                    <form action="{{ route('estudio.update', ['estudio' => $estudio->id])}}" method="POST"> 
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
                         <td>{{ $estudio->id }}</td>
                         <td> <input type="text" class="form-control" name="descripcion" value="{{ $estudio->descripcion }}" required></td>
                         <td><button type="submit" class="btn btn-info">
@@ -36,7 +43,9 @@
                         </button></td>
                     </form>
                     <td>
-                        <form action="" method="POST">
+                    <form action="{{ route('estudio.destroy', ['estudio' => $estudio->id])}}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </button>

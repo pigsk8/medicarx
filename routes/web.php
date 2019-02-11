@@ -44,8 +44,9 @@ Route::post('/perfil-estado','PerfilController@editEstado')->middleware('auth')-
 Route::post('/perfil-password','PerfilController@editPass')->middleware('auth')->name('edit-perfil-password');
 
 //estudios
-Route::get('estudio','EstudioController@index')->middleware('auth')->name('estudio-index');
-Route::post('estudio/{estudio}','EstudioController@update')->middleware('auth')->name('estudio-update');
+Route::get('estudio','EstudioController@index')->middleware('auth')->name('estudio.index');
+Route::put('estudio/{estudio}','EstudioController@update')->middleware('auth')->name('estudio.update');
+Route::delete('estudio/{estudio}','EstudioController@destroy')->middleware('auth')->name('estudio.destroy');
 
 // POST      | estudio                               | estudio.store             | App\Http\Controllers\EstudioController@store                             | web          |
 // |        | GET|HEAD  | estudio                               | estudio.index             | App\Http\Controllers\EstudioController@index                             | web          |
