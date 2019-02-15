@@ -10551,77 +10551,21 @@ $(document).ready(function () {
             var content = '<div class="item-file">\n    \n                <div class="form-group">\n                    <label>Subir imagen radiografica:</label>\n                    <input type="file" class="form-control-file" name="img-rad[]">\n                </div>\n                <div class="form-group">\n                    <label>Seleccione tipo de estudio:</label>\n                    <select class="form-control text-capitalize" name="estudio[]">' + list + '</select>\n                </div>\n    \n            </div>';
 
             $('.multiple-file').append(content);
+            $('.btn-remove-file').prop("disabled", false);
         });
     });
 
-    /** Progres Bar Upload File Consulta */
+    /** Elimnar campo de archivo */
 
-    // var inputFile = $('#img-rad');
-
-    // inputFile.change(function(){
-    //     $('#name-file').html(inputFile.val());
-    // });
-
-    // function validate(formData, jqForm, options) {
-    //     var form = jqForm[0];
-    //     if (!form.file.value) {
-    //         alert('File not found');
-    //         return false;
-    //     }
-    // }
-
-    // (function() {
-
-    //     var bar = $('.bar');
-    //     var percent = $('.percent');
-    //     var status = $('#status');
-
-    //     $('#form-upload-file').ajaxForm({
-    //         beforeSend: function() {
-    //             status.empty();
-    //             var percentVal = '0%';
-    //             bar.width(percentVal);
-    //             percent.html(percentVal);
-    //         },
-    //         uploadProgress: function(event, position, total, percentComplete) {
-    //             var percentVal = percentComplete + '%';
-    //             bar.width(percentVal);
-    //             percent.html(percentVal);
-    //         },
-    //         success: function() {
-    //             var percentVal = 'Espere, Guardando';
-    //             bar.width(percentVal)
-    //             percent.html(percentVal);
-    //         },
-    //         complete: function(xhr) {
-    //             var msj='';
-    //             if(xhr.status == 422){
-    //                 for(var i in xhr.responseJSON){  
-    //                     console.log()
-    //                     for(var j in xhr.responseJSON[i]){
-    //                         msj=msj+'<p>'+xhr.responseJSON[i][j]+'</p>';
-    //                     }
-    //                 }
-    //                 status.html('<div class="alert alert-danger">'+msj+'</div>');
-    //                 var percentVal = '0%';
-    //                 bar.width(percentVal);
-    //                 percent.html(percentVal);
-    //                 inputFile.val(''); 
-    //                 $('#name-file').html(inputFile.val());
-    //             }else if(xhr.status == 200){
-    //                 status.html('<div class="alert alert-success">Consulta creada</div>');
-    //                 var percentVal = '0%';
-    //                 bar.width(percentVal);
-    //                 percent.html(percentVal);
-    //                 inputFile.val(''); 
-    //                 $('#name-file').html(inputFile.val());
-    //             }else{
-    //                 status.html('<div class="alert alert-danger">Error desconocido, actualiza e intenta de nuevo</div>');
-    //             }
-    //         }
-    //     });
-
-    // })();
+    $('.btn-remove-file').click(function (event) {
+        event.preventDefault();
+        if ($(".item-file").toArray().length > 1) {
+            $(".item-file").last().remove();
+            if ($(".item-file").toArray().length == 1) {
+                $('.btn-remove-file').prop("disabled", true);
+            }
+        }
+    });
 });
 
 /***/ }),

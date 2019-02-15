@@ -59,7 +59,6 @@
                 <div class="form-group">
                     <label>Subir imagen radiografica:</label>
                     <input type="file" class="form-control-file" name="img-rad[]">
-                    <div id="name-file"></div>
                 </div>
                 <div class="form-group">
                     <label for="select-estudio">Seleccione tipo de estudio:</label>
@@ -74,11 +73,20 @@
         </div>
 
         <div class="add-new-file">
-            <span>Agregar nuea imagen radiografica </span>
-                <button class="btn btn-info btn-add-file" data-route="{{ route('estudio.list') }}">
+            <button class="btn btn-info btn-add-file" data-route="{{ route('estudio.list') }}">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
+            <span>Agregar nueva imagen radiografica </span>
         </div>
+        <br>
+        <div class="delete-new-file">
+            <button class="btn btn-warning btn-remove-file" disabled>
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+            </button>
+            <span>Eliminar ultimo campo de imagen radiografica </span>
+        </div>
+
+        <br>
 
         <button type="submit" class="btn btn-default">Crear</button>
 
