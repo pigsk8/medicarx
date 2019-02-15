@@ -29,19 +29,16 @@
     </div>
 
     @foreach($consulta->radiografias as $radiografia)
-    <p>Tipo de estudio: <span class="text-capitalize">{{$radiografia->estudio->descripcion}}</span></p>
-    <figure>
-        <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="40%">
-    </figure> 
-    
-    
-    
-    <br>
+        <p>Tipo de estudio: <span class="text-capitalize">{{$radiografia->estudio->descripcion}}</span></p>
+        <figure>
+            <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="40%">
+        </figure> 
+        
+        <br>
 
-    <a href="{{ Storage::url($radiografia->ruta_img) }}" download>
-        <button type="submit" class="btn btn-default">Descargar</button>
-    </a>
-    
+        <a href="{{ Storage::url($radiografia->ruta_img) }}" download>
+            <button type="submit" class="btn btn-default">Descargar</button>
+        </a>
     @endforeach
 
     <br><br>

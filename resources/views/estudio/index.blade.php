@@ -14,10 +14,10 @@
     @endif
 
     @if(session()->has('warning'))
-    <div class="alert alert-warning">
-        {{ session()->get('warning') }}
-    </div>
-@endif
+        <div class="alert alert-warning">
+            {{ session()->get('warning') }}
+        </div>
+    @endif
 
     @if(!empty($estudios))
     <div class="table-responsive">

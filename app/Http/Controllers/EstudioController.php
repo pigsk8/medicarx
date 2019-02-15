@@ -69,4 +69,9 @@ class EstudioController extends Controller
         }
         
     }
+
+    public function list(){
+        $estudios = Estudio::all();
+        return response()->json($estudios, 200);
+    }
 }

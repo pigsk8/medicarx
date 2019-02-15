@@ -41,8 +41,9 @@
                     <td>{{ $consulta->fecha_entrega }}</td>
                     <td class="text-capitalize">
                         @foreach($consulta->radiografias as $radiografia)
-                            {{ $radiografia->estudio->descripcion }}
+                            <?php $variable[] = $radiografia->estudio->descripcion ?>
                         @endforeach
+                        {{ implode(" ", array_unique($variable)) }}
                     </td>
                     <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">
                         <button type="button" class="btn btn-info">

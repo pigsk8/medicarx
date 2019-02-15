@@ -50,6 +50,8 @@ Route::get('estudios','EstudioController@index')->middleware('auth')->name('estu
 Route::post('estudios','EstudioController@store')->middleware('auth')->name('estudio.store');
 Route::put('estudios/{estudio}','EstudioController@update')->middleware('auth')->name('estudio.update');
 Route::delete('estudios/{estudio}','EstudioController@destroy')->middleware('auth')->name('estudio.destroy');
+Route::get('estudios/list','EstudioController@list')->middleware('auth')->name('estudio.list');
+
 
 //consultas
 Route::get('/consulta', 'ConsultaController@create')->middleware('auth')->name('consulta-crear');

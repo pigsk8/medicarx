@@ -24,21 +24,35 @@ class ConsultaController extends Controller
 
     public function save(ConsultaRequest $request){
 
-        $consulta = new Consulta();
-        $consulta->user_medico_id = $request->medico;
-        $consulta->user_paciente_id = $request->paciente;
-        $consulta->fecha_solicitud = date('Y-m-d H:i:s');
-        $consulta->save();
+        $files = $request->file('img-rad');
 
-        $image = $request->file('img-rad');
+        if( isset($request->estudio) && isset($files) ){
 
-        $radiografia = new Radiografia();
-        $radiografia->ruta_img = $image->store('radiografias', 'public');
-        $radiografia->consulta_id = $consulta->id;
-        $radiografia->estudio_id = $request->estudio;
-        $radiografia->save();
+            if(count($files) != count($request->estudio)){
+                return redirect()->back()->with('danger', 'Toda imagen radiografica debe tener un tipo de estudio asociado');
+            }else{
 
-        return response()->json(['success'=>'Consulta creada']);
+                $consulta = new Consulta();
+                $consulta->user_medico_id = $request->medico;
+                $consulta->user_paciente_id = $request->paciente;
+                $consulta->fecha_solicitud = date('Y-m-d H:i:s');
+                $consulta->save();
+
+                for ($i = 0; $i < count($files); $i++) {
+                    $radiografia = new Radiografia();
+                    $radiografia->consulta_id = $consulta->id;
+                    $radiografia->ruta_img = $files[$i]->store('radiografias', 'public');
+                    $radiografia->estudio_id = $request->estudio[$i];
+                    $radiografia->save();
+                }
+
+                return redirect()->back()->with('success', 'Consulta creada');
+            }
+
+        }else{
+            return redirect()->back()->with('danger', 'Toda imagen radiografica debe tener un tipo de estudio asociado');
+        }
+
     }
 
     public function list(){

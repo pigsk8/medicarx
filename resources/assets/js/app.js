@@ -89,73 +89,106 @@ $(document).ready(function () {
     $('.selectpicker').selectpicker();
     $('.filter-option-inner-inner').addClass('text-capitalize');
 
-    /** Progres Bar Upload File Consulta */
+    /** Agregar nuevas radiografías */
 
-    var inputFile = $('#img-rad');
+    $('.btn-add-file').click(function(event){
+        event.preventDefault();
 
-    inputFile.change(function(){
-        $('#name-file').html(inputFile.val());
-    });
+        $.get($(this).attr('data-route'), function(data, status){
 
-    function validate(formData, jqForm, options) {
-        var form = jqForm[0];
-        if (!form.file.value) {
-            alert('File not found');
-            return false;
-        }
-    }
-
-    (function() {
-
-        var bar = $('.bar');
-        var percent = $('.percent');
-        var status = $('#status');
+            var list = "";
+            data.forEach(element => {
+                list += '<option value="'+ element.id +'" class="text-capitalize">'+element.descripcion+'</option>';
+            });
     
-        $('#form-upload-file').ajaxForm({
-            beforeSend: function() {
-                status.empty();
-                var percentVal = '0%';
-                bar.width(percentVal);
-                percent.html(percentVal);
-            },
-            uploadProgress: function(event, position, total, percentComplete) {
-                var percentVal = percentComplete + '%';
-                bar.width(percentVal);
-                percent.html(percentVal);
-            },
-            success: function() {
-                var percentVal = 'Espere, Guardando';
-                bar.width(percentVal)
-                percent.html(percentVal);
-            },
-            complete: function(xhr) {
-                var msj='';
-                if(xhr.status == 422){
-                    for(var i in xhr.responseJSON){  
-                        console.log()
-                        for(var j in xhr.responseJSON[i]){
-                            msj=msj+'<p>'+xhr.responseJSON[i][j]+'</p>';
-                        }
-                    }
-                    status.html('<div class="alert alert-danger">'+msj+'</div>');
-                    var percentVal = '0%';
-                    bar.width(percentVal);
-                    percent.html(percentVal);
-                    inputFile.val(''); 
-                    $('#name-file').html(inputFile.val());
-                }else if(xhr.status == 200){
-                    status.html('<div class="alert alert-success">Consulta creada</div>');
-                    var percentVal = '0%';
-                    bar.width(percentVal);
-                    percent.html(percentVal);
-                    inputFile.val(''); 
-                    $('#name-file').html(inputFile.val());
-                }else{
-                    status.html('<div class="alert alert-danger">Error desconocido, actualiza e intenta de nuevo</div>');
-                }
-            }
+            var content = `<div class="item-file">
+    
+                <div class="form-group">
+                    <label>Subir imagen radiografica:</label>
+                    <input type="file" class="form-control-file" name="img-rad[]">
+                </div>
+                <div class="form-group">
+                    <label>Seleccione tipo de estudio:</label>
+                    <select class="form-control text-capitalize" name="estudio[]">`
+                    + list +
+                    `</select>
+                </div>
+    
+            </div>`;
+    
+            $('.multiple-file').append(content);
         });
 
-    })();
+    });
+
+
+    /** Progres Bar Upload File Consulta */
+
+    // var inputFile = $('#img-rad');
+
+    // inputFile.change(function(){
+    //     $('#name-file').html(inputFile.val());
+    // });
+
+    // function validate(formData, jqForm, options) {
+    //     var form = jqForm[0];
+    //     if (!form.file.value) {
+    //         alert('File not found');
+    //         return false;
+    //     }
+    // }
+
+    // (function() {
+
+    //     var bar = $('.bar');
+    //     var percent = $('.percent');
+    //     var status = $('#status');
+    
+    //     $('#form-upload-file').ajaxForm({
+    //         beforeSend: function() {
+    //             status.empty();
+    //             var percentVal = '0%';
+    //             bar.width(percentVal);
+    //             percent.html(percentVal);
+    //         },
+    //         uploadProgress: function(event, position, total, percentComplete) {
+    //             var percentVal = percentComplete + '%';
+    //             bar.width(percentVal);
+    //             percent.html(percentVal);
+    //         },
+    //         success: function() {
+    //             var percentVal = 'Espere, Guardando';
+    //             bar.width(percentVal)
+    //             percent.html(percentVal);
+    //         },
+    //         complete: function(xhr) {
+    //             var msj='';
+    //             if(xhr.status == 422){
+    //                 for(var i in xhr.responseJSON){  
+    //                     console.log()
+    //                     for(var j in xhr.responseJSON[i]){
+    //                         msj=msj+'<p>'+xhr.responseJSON[i][j]+'</p>';
+    //                     }
+    //                 }
+    //                 status.html('<div class="alert alert-danger">'+msj+'</div>');
+    //                 var percentVal = '0%';
+    //                 bar.width(percentVal);
+    //                 percent.html(percentVal);
+    //                 inputFile.val(''); 
+    //                 $('#name-file').html(inputFile.val());
+    //             }else if(xhr.status == 200){
+    //                 status.html('<div class="alert alert-success">Consulta creada</div>');
+    //                 var percentVal = '0%';
+    //                 bar.width(percentVal);
+    //                 percent.html(percentVal);
+    //                 inputFile.val(''); 
+    //                 $('#name-file').html(inputFile.val());
+    //             }else{
+    //                 status.html('<div class="alert alert-danger">Error desconocido, actualiza e intenta de nuevo</div>');
+    //             }
+    //         }
+    //     });
+
+    // })();
 });
 

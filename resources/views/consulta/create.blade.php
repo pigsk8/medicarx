@@ -13,8 +13,13 @@
             {{ session()->get('success') }}
         </div>
     @endif
+
+    @if(session()->has('danger'))
+        <div class="alert alert-danger">
+            {{ session()->get('danger') }}
+        </div>
+    @endif
     
-    <div id="status"></div>
 
     <form action="{{ route('consulta-save') }}" method="POST" enctype="multipart/form-data" id="form-upload-file">
         {{ csrf_field() }}
@@ -48,27 +53,31 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label class="btn btn-default" for="img-rad">Subir imagen radiografica </label>
-            <input type="file" class="form-control-file" name="img-rad" id="img-rad">
-            <div id="name-file"></div>
+        <div class="multiple-file">
+            <div class="item-file">
+
+                <div class="form-group">
+                    <label>Subir imagen radiografica:</label>
+                    <input type="file" class="form-control-file" name="img-rad[]">
+                    <div id="name-file"></div>
+                </div>
+                <div class="form-group">
+                    <label for="select-estudio">Seleccione tipo de estudio:</label>
+                    <select class="form-control text-capitalize" name="estudio[]" id="select-estudio">
+                        @foreach ($estudios as $estudio)
+                            <option value="{{ $estudio->id }}" {{ (old("estudio") == $estudio->id ? "selected":"") }} class="text-capitalize">{{ $estudio->descripcion }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+            </div>
         </div>
 
-        <div class="progress">
-            <div class="bar"></div >
-            <div class="percent">0%</div >
-        </div>
-
-        
-
-
-        <div class="form-group">
-            <label for="select-estudio">Seleccione tipo de estudio:</label>
-            <select class="form-control text-capitalize" name="estudio" id="select-estudio">
-                @foreach ($estudios as $estudio)
-                    <option value="{{ $estudio->id }}" {{ (old("estudio") == $estudio->id ? "selected":"") }} class="text-capitalize">{{ $estudio->descripcion }}</option>
-                @endforeach
-            </select>
+        <div class="add-new-file">
+            <span>Agregar nuea imagen radiografica </span>
+                <button class="btn btn-info btn-add-file" data-route="{{ route('estudio.list') }}">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
         </div>
 
         <button type="submit" class="btn btn-default">Crear</button>

@@ -90,5 +90,14 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // $medicoUser->attachRole($medico);
         
+
+        //tipo de studio
+        $c_state = new \App\Estudio();
+        $c_state->descripcion = 'Torax';
+        $c_state->save();
+
+        $c_state2 = new \App\Estudio();
+        $c_state2->descripcion = 'Craneo';
+        $c_state2->save(); 
     }
 }
