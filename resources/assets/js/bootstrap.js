@@ -14,4 +14,4 @@ try {
 } catch (e) { }
 
 require('bootstrap-select');
-require('jquery-form');
+// require('jquery-form');

@@ -11,6 +11,13 @@
         {{ session()->get('message') }}
     </div>
 @endif
+
+@if(session()->has('warning'))
+    <div class="alert alert-warning">
+        {{ session()->get('warning') }}
+    </div>
+@endif
+
 <div class="page-header">
     <h3>Editar perfil - <span class="text-capitalize">{{ $user->name }}</span></h3>
 </div>
@@ -42,16 +49,10 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('ci') ? ' has-error' : '' }}">
-                        <label for="ci" class="col-md-4 control-label">Cedula de identidad</label>
+                        <label class="col-md-4 control-label">Cedula de identidad</label>
 
                         <div class="col-md-6">
-                            <input id="ci" type="text" class="form-control" name="ci" value="{{$user->ci}}" required>
-
-                            @if ($errors->has('ci'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('ci') }}</strong>
-                                </span>
-                            @endif
+                            <p class="form-control-static">{{$user->ci}}</p>
                         </div>
                     </div>
 
@@ -59,27 +60,15 @@
                         <label for="username" class="col-md-4 control-label">Nombre de usuario</label>
 
                         <div class="col-md-6">
-                            <input id="username" type="text" class="form-control" name="username" value="{{ $user->username }}" required>
-
-                            @if ($errors->has('username'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('username') }}</strong>
-                                </span>
-                            @endif
+                            <p class="form-control-static">{{$user->username}}</p>
                         </div>
                     </div>
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="col-md-4 control-label">Correo electronico</label>
+                        <label class="col-md-4 control-label">Correo electronico</label>
 
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" required>
-
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
+                            <p class="form-control-static">{{ $user->email }}</p>
                         </div>
                     </div>
 
@@ -219,7 +208,7 @@
             </div>
         </div>
 
-        @role('admin') 
+        {{-- @role('admin') 
         @if(!(Auth::user()->id==$user->id))
         <div class="panel panel-default">
             <div class="panel-heading">Actualizar estado</div>
@@ -260,7 +249,7 @@
             </div>
         </div>
         @endif
-        @endrole
+        @endrole --}}
 
     </div>
 

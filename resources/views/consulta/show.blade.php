@@ -28,18 +28,39 @@
         </div>
     </div>
 
-    @foreach($consulta->radiografias as $radiografia)
-        <p>Tipo de estudio: <span class="text-capitalize">{{$radiografia->estudio->descripcion}}</span></p>
-        <figure>
-            <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="40%">
-        </figure> 
-        
-        <br>
+    <h2>Visor de Radiografías</h2>
 
-        <a href="{{ Storage::url($radiografia->ruta_img) }}" download>
-            <button type="submit" class="btn btn-default">Descargar</button>
-        </a>
-    @endforeach
+    <div class="viewer-container">
+        <ul class="nav nav-tabs">
+            <?php $cont_rad=0 ?>
+            @foreach($consulta->radiografias as $radiografia)
+            <li class="{{ ($cont_rad==0) ? 'active' : '' }}">
+                <a data-toggle="tab" href="#rad-{{$cont_rad+1}}">
+                    <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="150px" height="auto">
+                </a>
+            </li>
+            <?php $cont_rad++ ?>
+            @endforeach
+        </ul>
+
+        <div class="tab-content">
+            <?php $cont_rad=0 ?>
+            @foreach($consulta->radiografias as $radiografia)
+                <div id="rad-{{$cont_rad+1}}" class="tab-pane fade in {{ ($cont_rad==0) ? 'active' : '' }} viewer-item">
+                    <p>Tipo de estudio: <span class="text-capitalize">{{$radiografia->estudio->descripcion}}</span></p>
+                    <figure>
+                        <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="40%">
+                    </figure> 
+                    <br>
+                    <a href="{{ Storage::url($radiografia->ruta_img) }}" download>
+                        <button type="submit" class="btn btn-default">Descargar</button>
+                    </a>
+                </div>
+            <?php $cont_rad++ ?>
+            @endforeach
+        </div>
+
+    </div>
 
     <br><br>
 

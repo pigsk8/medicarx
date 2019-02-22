@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ConsultaRequest extends FormRequest
+class UpdatePerfilRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,16 @@ class ConsultaRequest extends FormRequest
     public function rules()
     {
         return [
-            'paciente' => 'required',
-            'medico' => 'required',
-            'estudio' => 'required',
+            'name' => 'required|string|max:60',
+            'role' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'paciente.required' => 'El paciente es obligatorio',
-            'medico.required' => 'El medico es obligatorio',
-            'estudio.required' => 'El tipo de estudio es obligatorio',
+            'name.required' => "Se requiere nombre",
+            'name.max' => "El nombre no puede exceder 60 caracteres",
+            'role' => 'Debe asignar un rol al usuario',
         ];
     }
 }

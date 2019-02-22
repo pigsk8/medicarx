@@ -31,7 +31,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Rol</th>
-                <th>Estado</th>
+                <th>Cedula</th>
                 <th>Ver</th>
                 <th>Eliminar</th>
             </tr>
@@ -48,7 +48,7 @@
                         No tiene rol
                     @endforelse
                 </td>
-                <td class="text-capitalize">{{ $user->estado_usuario->descripcion }}</td>
+                <td class="text-capitalize">{{ $user->ci }}</td>
                 <td><a href="{{ route('perfil-user', ['user' => $user->id ]) }}">
                     <button type="button" class="btn btn-info">
                         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

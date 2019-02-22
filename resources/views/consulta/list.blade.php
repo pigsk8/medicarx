@@ -28,7 +28,7 @@
                     <th>Fecha de entrega</th>
                     <th>Estudio</th>
                     <th>Ver</th>
-                    <th>Eliminar</th>
+                    {{-- <th>Eliminar</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -50,14 +50,14 @@
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </button>
                     </a></td>
-                    <td>
+                    {{-- <td>
                     <form action="{{ route('consulta-delete', ['consulta' => $consulta->id ]) }}"  method="POST">
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
                     </form>
-                    </td>
+                    </td> --}}
                 </tr>
                 @endforeach
             </tbody>

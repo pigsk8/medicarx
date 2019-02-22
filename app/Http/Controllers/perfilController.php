@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\RegisterAdminRequest;
 use Hash;
 use App\User;
 use App\Role;
@@ -18,54 +19,66 @@ class PerfilController extends Controller
     {
         $users = User::with('estado_usuario')->get();
         return view('perfil.list')
-        ->with('users',$users);
+            ->with('users', $users);
     }
 
     public function show(User $user)
     {
         $questions = Pregunta::all();
-        $estados  = EstadoUsuario::all();
+        $estados = EstadoUsuario::all();
         $roles = Role::all();
         $rol = $user->roles()->get()->toArray();
         $isAdmin = Auth::user()->hasRole('admin');
-        if(count($user->preguntas)>0){
+        if (count($user->preguntas) > 0) {
             $hasQuestions = true;
-        }else{
+        } else {
             $hasQuestions = false;
         }
         return view('perfil.showEdit')
-        ->with('user', $user)
-        ->with('isAdmin', $isAdmin)
-        ->with('roles', $roles)
-        ->with('rol', $rol)
-        ->with('estados', $estados)
-        ->with('questions', $questions)
-        ->with('hasQuestions', $hasQuestions);
+            ->with('user', $user)
+            ->with('isAdmin', $isAdmin)
+            ->with('roles', $roles)
+            ->with('rol', $rol)
+            ->with('estados', $estados)
+            ->with('questions', $questions)
+            ->with('hasQuestions', $hasQuestions);
     }
 
-    public function edit(Request $request){
+    public function edit(RegisterAdminRequest $request)
+    {
         $userEdit = User::find($request->user_id);
+        $role_entry = Role::find($request->input('role'));
+        $consultasUser = Consulta::where('user_medico_id', $userEdit->id)
+        ->orwhere('user_paciente_id', $userEdit->id)->get();
+
         $userEdit->name = $request->name;
         $userEdit->email = $request->email;
         $userEdit->ci = $request->ci;
         $userEdit->username = $request->username;
-        // $avatar = $request->avatar;
-        // $userEdit->avatar = $avatar->store('users', 'public');
-
-        $userEdit->save();
-
-        $role_entry = Role::find($request->input('role'));
-
         
-        if($role_entry){
-            $userEdit->roles()->detach();
-            $userEdit->attachRole($role_entry);
+        if($userEdit->roles[0]->id != $request->input('role')){
+            if( count($consultasUser) > 0){
+                return redirect()->back()->with('warning', 'Usuario no puede modificar su rol y se encuentra asociado a consultas');
+            }else{
+                $userEdit->save();
+                if ($role_entry) {
+                    $userEdit->roles()->detach();
+                    $userEdit->attachRole($role_entry);
+                }
+            }
+        }else{
+            $userEdit->save();
+            if ($role_entry) {
+                $userEdit->roles()->detach();
+                $userEdit->attachRole($role_entry);
+            }
         }
-        
+
         return redirect()->back()->with('message', 'Perfil Actualizado');
     }
 
-    public function editPreguntas(Request $request){
+    public function editPreguntas(Request $request)
+    {
 
         $userEdit = User::find($request->user_id);
 
@@ -77,8 +90,9 @@ class PerfilController extends Controller
         return redirect()->back()->with('message', 'Preguntas Actualizadas');
     }
 
-    public function editEstado(Request $request){
-        
+    public function editEstado(Request $request)
+    {
+
         $userEdit = User::find($request->user_id);
         $userEdit->estado_usuario_id = $request->estado_user;
         $userEdit->save();
@@ -87,19 +101,20 @@ class PerfilController extends Controller
 
     }
 
-    public function editPass(PasswordRequest $request){
-        
+    public function editPass(PasswordRequest $request)
+    {
+
         $user = User::find($request->user_id);
 
         if (Hash::check($request->old_password, $user->password)) {
-            if($request->old_password == $request->password){
+            if ($request->old_password == $request->password) {
                 return redirect()->back()->with('messagePass', 'La contraseña nueva no puede ser igual a la actual');
-            }else{
+            } else {
                 $user->password = bcrypt($request->password);
                 $user->save();
                 return redirect()->back()->with('message', 'La contraseña ha sido actualizada');
             }
-        }else{
+        } else {
             return redirect()->back()->with('messagePass', 'La contraseña actual no coincide');
         }
         die();
@@ -114,29 +129,29 @@ class PerfilController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if(!empty($user)){
-            if($user->hasRole('paciente')){
-                $consultas = Consulta::where('user_paciente_id',$user->id)->get();
-                if(count($consultas)>0){
-                    return redirect()->back()->with('warning','Usuario no se puede eliminar, se encuentra asociado a consultas');
-                }else{
+        if (!empty($user)) {
+            if ($user->hasRole('paciente')) {
+                $consultas = Consulta::where('user_paciente_id', $user->id)->get();
+                if (count($consultas) > 0) {
+                    return redirect()->back()->with('warning', 'Usuario no se puede eliminar, se encuentra asociado a consultas');
+                } else {
                     $user->delete();
-                    return redirect()->back()->with('success','Usuario eliminado');
+                    return redirect()->back()->with('success', 'Usuario eliminado');
                 }
-            }else if($user->hasRole('medico')){
-                $consultas = Consulta::where('user_medico_id',$user->id)->get();
-                if(count($consultas)>0){
-                    return redirect()->back()->with('warning','Usuario no se puede eliminar, se encuentra asociado a consultas');
-                }else{
+            } else if ($user->hasRole('medico')) {
+                $consultas = Consulta::where('user_medico_id', $user->id)->get();
+                if (count($consultas) > 0) {
+                    return redirect()->back()->with('warning', 'Usuario no se puede eliminar, se encuentra asociado a consultas');
+                } else {
                     $user->delete();
-                    return redirect()->back()->with('success','Usuario eliminado');
+                    return redirect()->back()->with('success', 'Usuario eliminado');
                 }
-            }else{
+            } else {
                 $user->delete();
-                return redirect()->back()->with('success','Usuario eliminado');
+                return redirect()->back()->with('success', 'Usuario eliminado');
             }
-        }else{
-            return redirect()->back()->with('danger','Ha ocurrido un erro, actualiza y vuelve a intentar');            
+        } else {
+            return redirect()->back()->with('danger', 'Ha ocurrido un error, actualiza y vuelve a intentar');
         }
 
     }
