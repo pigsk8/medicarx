@@ -30,6 +30,9 @@
 
     <h2>Visor de Radiografías</h2>
 
+</div>
+
+<div class="container-fluid">
     <div class="viewer-container">
         <ul class="nav nav-tabs">
             <?php $cont_rad=0 ?>
@@ -37,6 +40,8 @@
             <li class="{{ ($cont_rad==0) ? 'active' : '' }}">
                 <a data-toggle="tab" href="#rad-{{$cont_rad+1}}">
                     <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="150px" height="auto">
+                    <br>
+                    <p class="text-center"><span class="text-capitalize">{{$radiografia->estudio->descripcion}}</span></p>
                 </a>
             </li>
             <?php $cont_rad++ ?>
@@ -47,10 +52,22 @@
             <?php $cont_rad=0 ?>
             @foreach($consulta->radiografias as $radiografia)
                 <div id="rad-{{$cont_rad+1}}" class="tab-pane fade in {{ ($cont_rad==0) ? 'active' : '' }} viewer-item">
-                    <p>Tipo de estudio: <span class="text-capitalize">{{$radiografia->estudio->descripcion}}</span></p>
-                    <figure>
-                        <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="40%">
-                    </figure> 
+                    <div class="content-img">
+                        <div class="controls">
+                            <div class="btn btn-default control" data-control="control-zoom">
+                                <span title="Realiza el zoom pasando el mouse por encima">Zoom</span>    
+                            </div>
+                            <div class="btn btn-default control" data-control="control-invert">
+                                <span title="Aplica negativo a la imagen">Invertir</span>    
+                            </div>
+                            <div class="btn btn-default control" data-control="control-pan">
+                                <span title="Mueve la imagen con click">Mover</span>    
+                            </div>
+                        </div>
+                        <figure data-image="{{ Storage::url($radiografia->ruta_img) }}">
+                            <img src="{{ Storage::url($radiografia->ruta_img) }}">
+                        </figure>
+                    </div> 
                     <br>
                     <a href="{{ Storage::url($radiografia->ruta_img) }}" download>
                         <button type="submit" class="btn btn-default">Descargar</button>
@@ -62,7 +79,9 @@
 
     </div>
 
-    <br><br>
+</div>
+<br><br>
+<div class="container">
 
     @role('medico')
     <form action="{{ Route('consulta-save-diagnostico', ['consulta' => $consulta->id ]) }}" method="POST">
