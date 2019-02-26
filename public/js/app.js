@@ -31366,21 +31366,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
             };
 
             //Set the flags and the starting co-ordinates on move down
-            $this.on('mousedown', function (e) {
+            $this.on('mousedown touchstart', function (e) {
                 $this.move.status = true;
                 $this.move.oldX = e.pageX - $img.offset().left;
                 $this.move.oldY = e.pageY - $img.offset().top;
                 e.preventDefault();
             });
             //Reset the flags on mouse up
-            $this.on('mouseup mouseout', function (e) {
+            $this.on('mouseup mouseout touchend', function (e) {
                 $this.move.status = false;
                 $this.move.oldX = e.pageX - $img.offset().left;
                 $this.move.oldY = e.pageY - $img.offset().top;
                 e.preventDefault();
             });
             //Check the mouse button and move the image with respect to the cursor position
-            $this.on('mousemove', function (e) {
+            $this.on('mousemove touchmove', function (e) {
                 if ($this.move.status) {
                     //Update position based on drag
                     $img.css('left', parseInt($img.css('left')) + (e.pageX - $img.offset().left) - $this.move.oldX);
@@ -31539,20 +31539,37 @@ $(document).ready(function () {
         var typeControl = $(this).attr('data-control');
         var figureRad = $(this).closest('.content-img').find('figure');
         var imgRad = $(this).closest('.content-img').find('img');
-        if (typeControl == 'control-invert') {
-            controlInvert($(this), imgRad);
+        $(this).toggleClass('btn-info');
+        if (typeControl == 'control-zoom') {
+            controlZoom(figureRad, imgRad);
+        } else if (typeControl == 'control-invert') {
+            controlInvert(imgRad);
         } else if (typeControl == 'control-pan') {
-            controlPan($(this), figureRad, imgRad);
+            controlPan(figureRad, imgRad);
         }
     });
 
-    function controlInvert(button, imgRad) {
-        button.toggleClass('btn-info');
+    $('.control-zoom').click(function () {
+        $('.control-zoom').removeClass('btn-info');
+        $(this).addClass('btn-info');
+        var imgRad = $(this).closest('.content-img').find('img');
+        var dataZoom = $(this).attr('data-zoom');
+        controlZoomTransform(imgRad, dataZoom);
+    });
+
+    function controlZoom() {
+        $('.control-zoom-bar').toggle();
+    }
+
+    function controlZoomTransform(imgRad, dataZoom) {
+        imgRad.css('transform', 'scale(' + dataZoom + ')');
+    }
+
+    function controlInvert(imgRad) {
         imgRad.toggleClass('control-invert');
     }
 
-    function controlPan(button, figureRad, imgRad) {
-        button.toggleClass('btn-info');
+    function controlPan(figureRad, imgRad) {
         // figureRad.toggleClass('simple-pan');
         imgRad.toggleClass('pan-image');
         figureRad.simplePan({

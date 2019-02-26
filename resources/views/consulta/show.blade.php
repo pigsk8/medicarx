@@ -34,13 +34,12 @@
 
 <div class="container-fluid">
     <div class="viewer-container">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs list-rad">
             <?php $cont_rad=0 ?>
             @foreach($consulta->radiografias as $radiografia)
-            <li class="{{ ($cont_rad==0) ? 'active' : '' }}">
+            <li class="{{ ($cont_rad==0) ? 'active' : '' }} list-rad-item">
                 <a data-toggle="tab" href="#rad-{{$cont_rad+1}}">
-                    <img src="{{ Storage::url($radiografia->ruta_img) }}" alt="" width="150px" height="auto">
-                    <br>
+                    <img src="{{ Storage::url($radiografia->ruta_img) }}">
                     <p class="text-center"><span class="text-capitalize">{{$radiografia->estudio->descripcion}}</span></p>
                 </a>
             </li>
@@ -62,6 +61,25 @@
                             </div>
                             <div class="btn btn-default control" data-control="control-pan">
                                 <span title="Mueve la imagen con click">Mover</span>    
+                            </div>
+                        </div>
+                        <div class="controls-bar">
+                            <div class="control-zoom-bar">
+                                <div class="btn btn-default control-zoom" data-zoom="1">
+                                    <span>Zoom 1</span>    
+                                </div>
+                                <div class="btn btn-default control-zoom" data-zoom="1.2">
+                                    <span>Zoom 2</span>    
+                                </div>
+                                <div class="btn btn-default control-zoom" data-zoom="1.4">
+                                    <span>Zoom 3</span>    
+                                </div>
+                                <div class="btn btn-default control-zoom" data-zoom="1.6">
+                                    <span>Zoom 4</span>    
+                                </div>
+                                <div class="btn btn-default control-zoom" data-zoom="1.8">
+                                    <span>Zoom 5</span>    
+                                </div>
                             </div>
                         </div>
                         <figure data-image="{{ Storage::url($radiografia->ruta_img) }}">

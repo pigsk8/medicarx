@@ -17,20 +17,37 @@ $(document).ready(function () {
         var typeControl = $(this).attr('data-control');
         var figureRad = $(this).closest('.content-img').find('figure');
         var imgRad = $(this).closest('.content-img').find('img');
-        if(typeControl=='control-invert'){
-            controlInvert($(this),imgRad);
+        $(this).toggleClass('btn-info');
+        if(typeControl=='control-zoom'){
+            controlZoom(figureRad,imgRad);
+        }else if(typeControl=='control-invert'){
+            controlInvert(imgRad);
         }else if(typeControl=='control-pan'){
-            controlPan($(this),figureRad,imgRad);
+            controlPan(figureRad,imgRad);
         }
     });
 
-    function controlInvert(button, imgRad){
-        button.toggleClass('btn-info');
+    $('.control-zoom').click(function(){
+        $('.control-zoom').removeClass('btn-info');
+        $(this).addClass('btn-info');
+        var imgRad = $(this).closest('.content-img').find('img');
+        var dataZoom = $(this).attr('data-zoom');
+        controlZoomTransform(imgRad, dataZoom);
+    });
+
+    function controlZoom(){
+        $('.control-zoom-bar').toggle();
+    }
+
+    function controlZoomTransform(imgRad, dataZoom){
+        imgRad.css('transform','scale('+dataZoom+')');
+    }
+
+    function controlInvert(imgRad){
         imgRad.toggleClass('control-invert');
     }
 
-    function controlPan(button, figureRad, imgRad){
-        button.toggleClass('btn-info');
+    function controlPan(figureRad, imgRad){
         // figureRad.toggleClass('simple-pan');
         imgRad.toggleClass('pan-image');
         figureRad.simplePan({

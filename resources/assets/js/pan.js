@@ -28,21 +28,21 @@
             };
 
             //Set the flags and the starting co-ordinates on move down
-            $this.on('mousedown', function (e) {
+            $this.on('mousedown touchstart', function (e) {
                 $this.move.status = true;
                 $this.move.oldX = (e.pageX - $img.offset().left);
                 $this.move.oldY = (e.pageY - $img.offset().top);
                 e.preventDefault();
             });
             //Reset the flags on mouse up
-            $this.on('mouseup mouseout', function (e) {
+            $this.on('mouseup mouseout touchend', function (e) {
                 $this.move.status = false;
                 $this.move.oldX = (e.pageX - $img.offset().left);
                 $this.move.oldY = (e.pageY - $img.offset().top);
                 e.preventDefault();
             });
             //Check the mouse button and move the image with respect to the cursor position
-            $this.on('mousemove', function (e) {
+            $this.on('mousemove touchmove', function (e) {
                 if ($this.move.status) {
                     //Update position based on drag
                     $img.css('left', parseInt($img.css('left')) + (e.pageX - $img.offset().left) - $this.move.oldX);

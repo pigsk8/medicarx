@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
-@import "variables";
+// @import "variables";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -25,6 +25,24 @@
     margin-bottom: 20px;
 }
 
+//** Viewer */
+.list-rad{
+    display: flex;
+    // overflow-x: scroll;
+    overflow-y: hidden;
+    justify-content: center;
+    .list-rad-item{
+        img{
+            width: 80px;
+            @media screen and (min-width: 768px){
+                width: 120px;
+            }
+        }
+    }
+}
+
+
+
 .content-img {
     margin: 20px auto;
     padding: 20px 10px;
@@ -44,50 +62,40 @@
     border: 1px solid white;
     width: 100%;
     height: auto;
+    overflow: hidden;
 }
 
 .content-img figure img {
-    width: 100%;
     width: auto;
     height: 400px;
-    overflow: hidden;
     position: relative;
 
     @media screen and (min-width: 768px) {
-        // width: 80%;
         height: 500px;
     }
 }
 
-.content-img .photo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    transition: transform .5s ease-out;
+/** Control zoom */
+
+.control-zoom-bar{
+    display: none;
+    .control-zoom{
+        margin-bottom: 10px;
+    }
 }
+/** Control invert */
 
 .control-invert {
     filter: invert(1);
 }
 
+/** Control Pan */
+
 .simple-pan {
     overflow: hidden;
     cursor: move;
-}
-
-.simple-pan .pan-image {
-    position: relative;
-    box-shadow: 0 0 5px black;
-}
-
-.simple-pan .pan-image.animate {
-    -webkit-transition: -webkit-transform 0.2s ease;
-    -moz-transition: -moz-transform 0.2s ease;
-    -o-transition: -o-transform 0.2s ease;
-    transition: transform 0.2s ease;
+    .pan-image {
+        position: relative;
+        box-shadow: 0 0 5px black;
+    }
 }
