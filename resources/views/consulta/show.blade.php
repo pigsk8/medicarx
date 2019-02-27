@@ -57,12 +57,16 @@
                             <div class="btn btn-default control" data-control="control-zoom">
                                 <span title="Realiza el zoom pasando el mouse por encima">Zoom</span>    
                             </div>
+                            {{-- <div class="btn btn-default control" data-control="control-pan">
+                                <span title="Mueve la imagen con click">Mover</span>    
+                            </div> --}}
+                            <div class="btn btn-default control" data-control="control-glass">
+                                <span title="Mueve la lupa con click">Lupa</span>    
+                            </div>
                             <div class="btn btn-default control" data-control="control-invert">
                                 <span title="Aplica negativo a la imagen">Invertir</span>    
                             </div>
-                            <div class="btn btn-default control" data-control="control-pan">
-                                <span title="Mueve la imagen con click">Mover</span>    
-                            </div>
+                            
 
                             {{-- Rotate --}}
                             <div class="btn btn-default control" data-control="control-rotate-horizontal">
@@ -81,7 +85,6 @@
                             <div class="btn btn-default control" data-control="control-rotate-left">
                                 <span title="Mueve la imagen con click">Rotar</span>  
                                 <span class="glyphicon glyphicon-repeat icon-left"></span>    
-
                             </div>
 
                         </div>
@@ -105,19 +108,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="figure">
-                            <div class="img-move">
-                                <div class="img-rotate">
-                                    <div class="img-flip-vert">
-                                        <div class="img-flip-hor">
-                                            <figure data-image="{{ Storage::url($radiografia->ruta_img) }}">
-                                                <img src="{{ Storage::url($radiografia->ruta_img) }}">
-                                            </figure>
+                        
+                        {{-- <div class="magnify">
+                            <div class="magnify_glass"></div>
+                            <div class = "element_to_magnify">
+                                <img src="{{ Storage::url($radiografia->ruta_img) }}" draggable="false">
+                            </div>
+                        </div> --}}
+                                        
+                        <div class="figure magnify">
+
+                            <div class="magnify_glass"></div>
+
+                            <div class="element_to_magnify">
+                                <div class="img-move">
+                                    <div class="img-rotate">
+                                        <div class="img-flip-vert">
+                                            <div class="img-flip-hor">
+                                                <figure>
+                                                    <img src="{{ Storage::url($radiografia->ruta_img) }}" draggable="false">
+                                                </figure>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
                     </div> 
                     <br>
                     <a href="{{ Storage::url($radiografia->ruta_img) }}" download>

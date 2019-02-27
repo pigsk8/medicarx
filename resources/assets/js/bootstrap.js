@@ -14,4 +14,6 @@ try {
 } catch (e) { }
 
 require('bootstrap-select');
+// require('jquery-ui');
+require('jquery-ui-dist/jquery-ui');
 // require('jquery-form');

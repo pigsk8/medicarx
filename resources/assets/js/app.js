@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./pan');
+require('./jquery.jfMagnify');
 require('./dt');
 require('./addfile');
 require('./viewer');
