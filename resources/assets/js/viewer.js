@@ -31,20 +31,18 @@ $(document).ready(function () {
             controlPan(figureContainer,moveImg);
         }else if(typeControl=='control-rotate-horizontal'){
             $(this).closest('.content-img').find('.img-flip-hor').toggleClass('flip-hor');
-            // $(this).closest('.content-img').find('.glass-flip-hor').toggleClass('flip-hor');
         }else if(typeControl=='control-rotate-vertical'){
             $(this).closest('.content-img').find('.img-flip-vert').toggleClass('flip-vert');
-            // $(this).closest('.content-img').find('.glass-flip-vert').toggleClass('flip-vert');
         }else if(typeControl=='control-rotate-left'){
+            console.log('left');
             var side = 'left';
             var block = $(this).closest('.content-img').find('.img-rotate');
-            var blockGlass = $(this).closest('.content-img').find('.glass-rotate');
-            controlRotate(block,blockGlass,side);
+            controlRotate(block,side);
         }else if(typeControl=='control-rotate-right'){
+            console.log('right');
             var side = 'right';
             var block = $(this).closest('.content-img').find('.img-rotate');
-            var blockGlass = $(this).closest('.content-img').find('.glass-rotate');
-            controlRotate(block,blockGlass,side);
+            controlRotate(block,side);
         }
     });
 
@@ -72,7 +70,7 @@ $(document).ready(function () {
         });
     }
 
-    function controlRotate(block,blockGlass,side){
+    function controlRotate(block,side){
         if(side=='left'){
             degrees -= 90;
         }else if(side=='right'){
@@ -81,11 +79,6 @@ $(document).ready(function () {
         block.css('-ms-transform', 'rotate(' + degrees + 'deg)');
         block.css('-webkit-transform', 'rotate(' + degrees + 'deg)');
         block.css('transform', 'rotate(' + degrees + 'deg)');
-        blockGlass.css('-ms-transform', 'rotate(' + degrees + 'deg)');
-        blockGlass.css('-webkit-transform', 'rotate(' + degrees + 'deg)');
-        blockGlass.css('transform', 'rotate(' + degrees + 'deg)');
     }
-
-
 
 });
