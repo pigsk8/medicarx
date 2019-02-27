@@ -9049,16 +9049,38 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
   }
 }
 
+.content-img h3 {
+  margin-top: 0;
+}
+
+.content-img h3,
+.content-img h4 {
+  color: white;
+}
+
 .content-img .controls {
   padding: 20px 0;
 }
 
-.content-img figure {
+.content-img .figure {
   text-align: center;
   border: 1px solid white;
   width: 100%;
   height: auto;
   overflow: hidden;
+}
+
+.content-img .figure .img-move {
+  position: relative;
+}
+
+.controls .control {
+  margin-bottom: 10px;
+}
+
+.icon-left {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 .content-img figure img {
@@ -9101,5 +9123,17 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
   position: relative;
   -webkit-box-shadow: 0 0 5px black;
           box-shadow: 0 0 5px black;
+}
+
+/**  Control Rotate */
+
+.flip-hor {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.flip-vert {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
 }
 

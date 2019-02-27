@@ -41,8 +41,6 @@
     }
 }
 
-
-
 .content-img {
     margin: 20px auto;
     padding: 20px 10px;
@@ -51,18 +49,35 @@
     @media screen and (min-width: 768px) {
         padding: 20px;
     }
+    h3{
+        margin-top: 0;
+    }
+    h3, h4{
+        color: white;
+    }
 }
 
 .content-img .controls {
     padding: 20px 0;
 }
 
-.content-img figure {
+.content-img .figure {
     text-align: center;
     border: 1px solid white;
     width: 100%;
     height: auto;
     overflow: hidden;
+    .img-move{
+        position: relative;
+    }
+}
+
+.controls .control{
+    margin-bottom: 10px;
+}
+
+.icon-left{
+    transform: rotateY(180deg);
 }
 
 .content-img figure img {
@@ -98,4 +113,12 @@
         position: relative;
         box-shadow: 0 0 5px black;
     }
+}
+
+/**  Control Rotate */
+.flip-hor{
+    transform: rotateY(180deg);
+}
+.flip-vert{
+    transform: rotateX(180deg);
 }

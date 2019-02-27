@@ -53,6 +53,7 @@
                 <div id="rad-{{$cont_rad+1}}" class="tab-pane fade in {{ ($cont_rad==0) ? 'active' : '' }} viewer-item">
                     <div class="content-img">
                         <div class="controls">
+                            <h3>Controles del visor</h3>
                             <div class="btn btn-default control" data-control="control-zoom">
                                 <span title="Realiza el zoom pasando el mouse por encima">Zoom</span>    
                             </div>
@@ -62,9 +63,31 @@
                             <div class="btn btn-default control" data-control="control-pan">
                                 <span title="Mueve la imagen con click">Mover</span>    
                             </div>
+
+                            {{-- Rotate --}}
+                            <div class="btn btn-default control" data-control="control-rotate-horizontal">
+                                <span title="Mueve la imagen con click">Voltear</span> 
+                                <span class="glyphicon glyphicon-resize-horizontal"></span>    
+                            </div>
+                            <div class="btn btn-default control" data-control="control-rotate-vertical">
+                                <span title="Mueve la imagen con click">Voltear</span>
+                                <span class="glyphicon glyphicon-resize-vertical"></span>    
+                            </div>
+                            <div class="btn btn-default control" data-control="control-rotate-right">
+                                <span title="Mueve la imagen con click">Rotar</span>   
+                                <span class="glyphicon glyphicon-repeat"></span>    
+
+                            </div>
+                            <div class="btn btn-default control" data-control="control-rotate-left">
+                                <span title="Mueve la imagen con click">Rotar</span>  
+                                <span class="glyphicon glyphicon-repeat icon-left"></span>    
+
+                            </div>
+
                         </div>
                         <div class="controls-bar">
                             <div class="control-zoom-bar">
+                                <h4>Opciones del zoom</h4>
                                 <div class="btn btn-default control-zoom" data-zoom="1">
                                     <span>Zoom 1</span>    
                                 </div>
@@ -82,9 +105,19 @@
                                 </div>
                             </div>
                         </div>
-                        <figure data-image="{{ Storage::url($radiografia->ruta_img) }}">
-                            <img src="{{ Storage::url($radiografia->ruta_img) }}">
-                        </figure>
+                        <div class="figure">
+                            <div class="img-move">
+                                <div class="img-rotate">
+                                    <div class="img-flip-vert">
+                                        <div class="img-flip-hor">
+                                            <figure data-image="{{ Storage::url($radiografia->ruta_img) }}">
+                                                <img src="{{ Storage::url($radiografia->ruta_img) }}">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div> 
                     <br>
                     <a href="{{ Storage::url($radiografia->ruta_img) }}" download>

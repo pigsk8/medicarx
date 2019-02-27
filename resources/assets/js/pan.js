@@ -12,7 +12,7 @@
         return this.each(function (i, j) {
             var $this = $(j);
             // Find Image to pan
-            var $img = $("img", $this);
+            var $img = $(".img-move", $this);
 
             $this.addClass('simple-pan').css(settings.css);
             $img.addClass('pan-image').css({
