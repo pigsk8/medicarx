@@ -153,6 +153,17 @@
 <div class="container">
 
     @role('medico')
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <label for="diagnostico">Enlace para compartir con otros doctores: 
+                <a href="{{ route('consulta-show-free', ['consulta' => $consulta->id, 'pass' => $consulta->freepass ]) }}" target="_blank">
+                    {{ route('consulta-show', ['consulta' => $consulta->id, 'pass' => $consulta->freepass ]) }}
+                </a>
+            </label>            
+        </div>
+    </div>
+
     <form action="{{ Route('consulta-save-diagnostico', ['consulta' => $consulta->id ]) }}" method="POST">
     {{ csrf_field() }}
     <div class="panel panel-default">
@@ -184,8 +195,6 @@
         </div>
     </div>
     @endrole
-
-
 
 
 </div>

@@ -36,6 +36,8 @@ class ConsultaController extends Controller
                 $consulta->user_medico_id = $request->medico;
                 $consulta->user_paciente_id = $request->paciente;
                 $consulta->fecha_solicitud = date('Y-m-d H:i:s');
+                $freepass = uniqid();
+                $consulta->freepass = $freepass;
                 $consulta->save();
 
                 for ($i = 0; $i < count($files); $i++) {
@@ -64,6 +66,18 @@ class ConsultaController extends Controller
     {
         $user = Auth::user();
         if($user->id == $consulta->user_paciente_id || $user->id == $consulta->user_medico_id || $user->hasRole('admin')){
+            return view('consulta.show')
+            ->with('consulta', $consulta);
+        }else{
+            return redirect('/');
+        }
+    }
+
+    public function showFree(Consulta $consulta, String $pass)
+    {
+        return view('consulta.show')
+            ->with('consulta', $consulta);
+        if($consulta->freepass == $pass){
             return view('consulta.show')
             ->with('consulta', $consulta);
         }else{
