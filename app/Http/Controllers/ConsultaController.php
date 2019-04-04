@@ -11,26 +11,30 @@ use App\User;
 use App\Consulta;
 use App\Radiografia;
 use App\Estudio;
+use App\Mail\NotifyPac;
+use App\Mail\NotifyDoc;
 
 class ConsultaController extends Controller
 {
-    public function create(){
+    public function create()
+    {
         $users = User::with("roles")->get();
         $estudios = Estudio::all();
         return view('consulta.create')
-        ->with('users',$users)
-        ->with('estudios',$estudios);
+            ->with('users', $users)
+            ->with('estudios', $estudios);
     }
 
-    public function save(ConsultaRequest $request){
+    public function save(ConsultaRequest $request)
+    {
 
         $files = $request->file('img-rad');
 
-        if( isset($request->estudio) && isset($files) ){
+        if (isset($request->estudio) && isset($files)) {
 
-            if(count($files) != count($request->estudio)){
+            if (count($files) != count($request->estudio)) {
                 return redirect()->back()->with('danger', 'Toda imagen radiografica debe tener un tipo de estudio asociado');
-            }else{
+            } else {
 
                 $consulta = new Consulta();
                 $consulta->user_medico_id = $request->medico;
@@ -48,27 +52,35 @@ class ConsultaController extends Controller
                     $radiografia->save();
                 }
 
+                /**Enviar notificación a doctor por la consulta */
+                $medico = User::find($request->medico);
+                $data = array(
+                    "name" => $medico->name
+                );
+                try {
+                    Mail::to($medico->email)->send(new NotifyDoc($data));
+                } catch (\Exception $e) { }
+
                 return redirect()->back()->with('success', 'Consulta creada');
             }
-
-        }else{
+        } else {
             return redirect()->back()->with('danger', 'Toda imagen radiografica debe tener un tipo de estudio asociado');
         }
-
     }
 
-    public function list(){
+    public function list()
+    {
         $consultas = Consulta::all();
-        return view('consulta.list')->with('consultas',$consultas);
+        return view('consulta.list')->with('consultas', $consultas);
     }
 
     public function show(Consulta $consulta)
     {
         $user = Auth::user();
-        if($user->id == $consulta->user_paciente_id || $user->id == $consulta->user_medico_id || $user->hasRole('admin')){
+        if ($user->id == $consulta->user_paciente_id || $user->id == $consulta->user_medico_id || $user->hasRole('admin')) {
             return view('consulta.show')
-            ->with('consulta', $consulta);
-        }else{
+                ->with('consulta', $consulta);
+        } else {
             return redirect('/');
         }
     }
@@ -77,28 +89,37 @@ class ConsultaController extends Controller
     {
         return view('consulta.show')
             ->with('consulta', $consulta);
-        if($consulta->freepass == $pass){
+        if ($consulta->freepass == $pass) {
             return view('consulta.show')
-            ->with('consulta', $consulta);
-        }else{
+                ->with('consulta', $consulta);
+        } else {
             return redirect('/');
         }
     }
 
-    public function delete(Consulta $consulta){
+    public function delete(Consulta $consulta)
+    {
         $consulta->delete();
         return redirect()->back()->with('success', 'Consulta eliminada');
     }
 
-    public function saveDiagnostico(DiagnosticoRequest $request, Consulta $consulta){
+    public function saveDiagnostico(DiagnosticoRequest $request, Consulta $consulta)
+    {
 
         $consulta->fecha_entrega = date('Y-m-d H:i:s');
         $consulta->diagnostico = $request->diagnostico;
         $consulta->estado_consulta_id = 2;
         $consulta->save();
 
+        /**Enviar notificación a doctor por la consulta */
+        $paciente = User::find($consulta->user_paciente_id);
+        $data = array(
+            "name" => $paciente->name
+        );
+        try {
+            Mail::to($paciente->email)->send(new NotifyPac($data));
+        } catch (\Exception $e) { }
+
         return redirect()->back()->with('success', 'Diagnostico realizado');
-
     }
-
 }
