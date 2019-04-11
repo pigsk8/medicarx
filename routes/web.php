@@ -45,6 +45,9 @@ Route::post('/perfil-password','PerfilController@editPass')->middleware('auth')-
 
 Route::delete('perfiles/{user}','PerfilController@destroy')->middleware('auth')->name('perfil.destroy');
 
+Route::get('/perfiles/{user}/historia','PerfilController@showHistoria')->middleware('auth')->name('perfil-user-historia');
+
+
 //estudios
 Route::get('estudios','EstudioController@index')->middleware('auth')->name('estudio.index');
 Route::post('estudios','EstudioController@store')->middleware('auth')->name('estudio.store');

@@ -155,4 +155,19 @@ class PerfilController extends Controller
         }
 
     }
+
+    public function showHistoria(User $user){
+        if ($user->hasRole('paciente')) {
+            $consultas = Consulta::where('user_paciente_id', $user->id)
+            ->with('estado_consulta')->with('radiografias')
+            ->orderby('id','desc')->get();
+            return view('perfil.historia')
+            ->with('consultas', $consultas)
+            ->with('user',$user);
+        }else{
+            return redirect('/');
+        }
+    }
+
+
 }

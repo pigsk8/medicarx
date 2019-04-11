@@ -22,7 +22,11 @@
         </div>
         <div class="panel-body">
             <p>Medico: <span class="text-capitalize">{{ $consulta->user_medico->name }}</span></p>
-            <p>Paciente: <span class="text-capitalize">{{ $consulta->user_paciente->name }}</span></p>
+            <p>Paciente: <span class="text-capitalize">{{ $consulta->user_paciente->name }}</span>
+                @role('medico')
+                    <span><a href="{{ route('perfil-user-historia', ['user' => $consulta->user_paciente]) }}">Ver historia medica del paciente</a></span>
+                @endrole
+            </p>
             <p>Fecha de solicitud: {{ $consulta->fecha_solicitud }}</p>
             <p>Fecha de entrega: {{ $consulta->fecha_entrega }}</p>
         </div>
