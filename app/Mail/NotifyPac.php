@@ -16,9 +16,9 @@ class NotifyPac extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -32,8 +32,8 @@ class NotifyPac extends Mailable
         $subject = 'Notificación de consulta diagnosticada';
         $name = 'Medicarx';
 
-        return $this->view('mails.infoPac')
-        >from($address,$name)
+        return $this->view('mails.notifyPac')
+        ->from($address,$name)
         ->cc($address, $name)
         ->bcc($address, $name)
         ->replyTo($address, $name)

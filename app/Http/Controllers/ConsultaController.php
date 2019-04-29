@@ -7,6 +7,7 @@ use App\Http\Requests\DiagnosticoRequest;
 use App\Http\Requests\ConsultaRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Consulta;
 use App\Radiografia;
