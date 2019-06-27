@@ -89,6 +89,12 @@
                             <button class="btn btn-default">Gestionar Tipo de Estudio</button>
                         </a>
                     </div>
+                    <br>
+                    <div>
+                        <a href="{{ route('reportes') }}">
+                            <button class="btn btn-default">Reportes</button>
+                        </a>
+                    </div>
                 @endrole
             @else
                 <div>

@@ -65,4 +65,5 @@ Route::get('/consultas/{consulta}/{pass}','ConsultaController@showFree')->name('
 Route::post('/consultas/delete/{consulta}','ConsultaController@delete')->middleware('auth')->name('consulta-delete');
 Route::post('/consultas/{consulta}/save-diagnostico','ConsultaController@saveDiagnostico')->middleware('auth')->name('consulta-save-diagnostico');
 
-
+//reportes
+Route::get('/reportes','ReporteController@index')->middleware('auth')->name('reportes');
