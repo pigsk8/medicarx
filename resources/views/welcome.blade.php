@@ -44,10 +44,13 @@
                                     <td>{{ $consulta->fecha_solicitud }}</td>
                                     
                                     <td class="text-capitalize"> 
+                                        <?php $estudio_pendiente = []; ?>
                                         @foreach($consulta->radiografias as $radiografia)
-                                            <?php $variable[] = $radiografia->estudio->descripcion ?>
+                                            <?php 
+                                                array_push($estudio_pendiente,$radiografia->estudio->descripcion);    
+                                            ?>
                                         @endforeach
-                                        {{ implode(" ", array_unique($variable)) }}
+                                        {{ implode(" ", array_unique($estudio_pendiente)) }}
                                     </td>
                                     <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">
                                         <button type="button" class="btn btn-info">
@@ -151,10 +154,13 @@
                                     @endrole
                                     <td>{{ $consulta->fecha_entrega }}</td>
                                     <td class="text-capitalize">
+                                        <?php $estudio_revisado = []; ?>
                                         @foreach($consulta->radiografias as $radiografia)
-                                            <?php $variable[] = $radiografia->estudio->descripcion ?>
+                                            <?php 
+                                                array_push($estudio_revisado,$radiografia->estudio->descripcion);  
+                                            ?>
                                         @endforeach
-                                        {{ implode(" ", array_unique($variable)) }}
+                                        {{ implode(" ", array_unique($estudio_revisado)) }}
                                     </td>
                                     <td><a href="{{ route('consulta-show', ['consulta' => $consulta->id ]) }}">
                                         <button type="button" class="btn btn-info">

@@ -40,8 +40,9 @@
                     <td>{{ $consulta->fecha_solicitud }}</td>
                     <td>{{ $consulta->fecha_entrega }}</td>
                     <td class="text-capitalize">
+                            <?php $variable = []; ?>
                         @foreach($consulta->radiografias as $radiografia)
-                            <?php $variable[] = $radiografia->estudio->descripcion ?>
+                            <?php array_push($variable,$radiografia->estudio->descripcion); ?>
                         @endforeach
                         {{ implode(" ", array_unique($variable)) }}
                     </td>
